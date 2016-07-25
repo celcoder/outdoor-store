@@ -18,3 +18,4 @@ Product.belongsToMany(Category, {through: 'ProductCategory'});
 Category.belongsToMany(Product, {through: 'ProductCategory'});
 
 Review.belongsTo(Product);
+Review.belongsTo(User);
