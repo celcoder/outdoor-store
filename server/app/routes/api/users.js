@@ -2,12 +2,20 @@ var router = require('express').Router();
 var db = require('../../db');
 var User = db.model('user');
 
-// Error handling function
-function sendErr(message, status, next) {
-    let err = new Error(message);
-    err.status = status;
-    next(err);
-}
+//<-------- another solution to error handling plus making our routers lean -------->//
+// router.param('id', function (req, res, next, id) {
+//   User.findById(id)
+//   .then(function (user) {
+//     if (user) {
+//       req.user = user;
+//       next();
+//     } else {
+//       throw HttpError(404);
+//     }
+//   })
+//   .catch(next);
+// });
+
 
 // Get all users
 router.get('/', (req, res, next) => {
@@ -21,7 +29,7 @@ router.get('/:id', (req, res, next) => {
     const id = req.params.id;
     User.findById(id)
         .then(user => {
-            if (!user) sendErr('No user found', 404, next);
+            if (!user) res.status(404).send('No user found')
             else res.json(user)
         })
         .catch(next)
@@ -44,7 +52,7 @@ router.put('/:id', (req, res, next) => {
     const id = req.params.id;
     User.findById(id)
         .then(user => {
-            if (!user) sendErr('No user found', 404, next);
+            if (!user) res.status(404).send('No user found')
             else return user.update(req.body);
         })
         .then(user => res.json(user))
@@ -56,7 +64,7 @@ router.delete('/:id', (req, res, next) => {
   const id = req.params.id;
   User.findById(id)
   .then(user => {
-    if (!user) sendErr('No user found', 404, next);
+    if (!user) res.status(404).send('No user found')
     else return user.destroy()
   })
   .then(() => res.status(204).send('User was deleted'))
