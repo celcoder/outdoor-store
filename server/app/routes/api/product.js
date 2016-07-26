@@ -1,4 +1,4 @@
-var db = require('../../db');
+var db = require('../../../db');
 var Product = db.model('product');
 var router = require('express').Router();
 
@@ -47,6 +47,4 @@ router.put('/:id', function(req,res,next){
 })
 
 module.exports = router;
-
-
 

@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var db = require('../../db');
+var db = require('../../../db');
 var User = db.model('user');
 
 //<-------- another solution to error handling plus making our routers lean -------->//
