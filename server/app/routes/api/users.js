@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
     User.findById(id)
-        .then(user =>
+        .then(user => {
             if (!user) sendErr('No user found', 404, next);
             else res.json(user)
         })
