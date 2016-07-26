@@ -38,6 +38,8 @@ router.post('/', (req, res, next) => {
 })
 
 // Updating user information
+// Test this route to make sure the
+// updated user is returned
 router.put('/:id', (req, res, next) => {
     const id = req.params.id;
     User.findById(id)
