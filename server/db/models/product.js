@@ -10,8 +10,8 @@ module.exports = db.define('product', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    photo: {
-        type: Sequelize.BLOB
+    photoUrl: {
+        type: Sequelize.STRING
     },
     status: {
         type: Sequelize.ENUM('available', 'out of stock', 'discontinued'),
