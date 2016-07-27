@@ -10,6 +10,9 @@
             <li ng-show="!item.auth || isLoggedIn()">
             <a ui-sref-active="active" ui-sref="membersOnly({id: user.id})">{{ account.label }}</a>
             </li>
+            <li>
+            <searchbar></searchbar>
+            </li>
         </ul>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
         <div ng-show="user" class="welcome">
