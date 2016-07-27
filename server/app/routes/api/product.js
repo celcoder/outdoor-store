@@ -40,7 +40,7 @@ router.post('/', function(req,res,next){
 
 //Update a product's stock and/or status where req.body = {status: 'out of stock', stock: 0}
 router.put('/:id', function(req,res,next){
-	Product.update(req.body, {where: {id: req.params.id}, returning:true})
+	Product.update(req.body, {where: {id: parseInt(req.params.id)}, returning:true})
 	.then(function(updatedProduct){
 		return res.status(200).send(updatedProduct);
 	})
