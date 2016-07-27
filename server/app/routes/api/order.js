@@ -10,9 +10,17 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
+var isCorrectUser = function() {
+	return (req.body.userId === req.user.id);
+}
+
+var isAdmin = function() {
+	return req.user.admin;
+}
+
 //Gets all orders associated with one user id
 router.get('/all', ensureAuthenticated, function(req, res, next) {
-	if (!req.user.admin && req.body.userId !== req.user.id) return res.sendStatus(401);
+	if (!isAdmin() && !isCorrectUser()) return res.sendStatus(401);
 	Order.findAll({userId: req.body.userId})
 	.then(function (orders) {
 		if (!orders.length) return res.sendStatus(400);
@@ -24,7 +32,7 @@ router.get('/all', ensureAuthenticated, function(req, res, next) {
 
 //Gets a single order by id
 router.get('/:id', ensureAuthenticated, function(req, res, next) {
-	if (!req.user.admin && req.body.userId !== req.user.id) return res.sendStatus(401);
+	if (!isAdmin() && !isCorrectUser()) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function (order) {
 		if (!order) return res.sendStatus(400);
@@ -36,7 +44,7 @@ router.get('/:id', ensureAuthenticated, function(req, res, next) {
 
 //Gets all orders in database  ***note: This is an ADMIN privelege!***
 router.get('/', ensureAuthenticated, function(req, res, next) {
-	if (!req.user.admin) return res.sendStatus(401);
+	if (!isAdmin()) return res.sendStatus(401);
 	Order.findAll({})
 	.then(allOrders => res.status(200).send(allOrders))
 	.catch(next);
@@ -44,7 +52,7 @@ router.get('/', ensureAuthenticated, function(req, res, next) {
 
 //Empty Cart or Cancel un-shipped Order
 router.delete('/:id', ensureAuthenticated, function(req,res,next){
-	if (!req.user.admin && req.body.userId !== req.user.id) return res.sendStatus(401);
+	if (!isAdmin() && !isCorrectUser()) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function(returnedOrder){
 		if (returnedOrder.status === 'cart') {
@@ -71,7 +79,7 @@ router.delete('/:id', ensureAuthenticated, function(req,res,next){
 
 //Change Order Status to "ordered" from "cart" and create a new cart. Return both to front-end.
 router.put('/:id/purchase', ensureAuthenticated, function(req,res,next){
-	if (req.body.userId !== req.user.id) return res.sendStatus(401);
+	if (!isCorrectUser()) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function(returnedOrder){
 		if (returnedOrder.status !== 'cart') return res.sendStatus(401);
@@ -90,7 +98,7 @@ router.put('/:id/purchase', ensureAuthenticated, function(req,res,next){
 
 //Admin change order status req.body must be {status: ''}
 router.put('/:id/status', ensureAuthenticated, function(req,res,next){
-	if (!req.user.admin) return res.sendStatus(401);
+	if (!isAdmin()) return res.sendStatus(401);
 	Order.update(req.body,{where:{id:req.params.id}, returning: true})
 	.then(function(updatedOrder){
 		return req.status(200).send(updatedOrder);
