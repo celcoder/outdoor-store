@@ -53,7 +53,7 @@ router.put('/:id', (req, res, next) => {
     User.findById(id)
         .then(user => {
             if (!user) res.status(404).send('No user found')
-            else return user.update(req.body);
+            else return user.update(req.body, {returning: true});
         })
         .then(user => res.json(user))
         .catch(next);
