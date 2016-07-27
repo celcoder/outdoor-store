@@ -17,12 +17,13 @@ module.exports = function (app, db) {
 
     var createNewUser = function (token, tokenSecret, profile) {
         return User.create({
-            twitter_id: profile.id
+            twitter_id: profile.id,
+            first_name: profile.displayName.split(' ')[0],
+            last_name: profile.displayName.split(' ')[1]
         });
     };
 
     var verifyCallback = function (token, tokenSecret, profile, done) {
-        console.log(profile);
         User.findOne({
             where: {
                 twitter_id: profile.id

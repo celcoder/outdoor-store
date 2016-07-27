@@ -43,6 +43,7 @@ router.post('/', (req, res, next) => {
 // Test this route to make sure the
 // updated user is returned
 router.put('/:id', (req, res, next) => {
+
   // const id = req.params.id;
   // User.findById(id)
   //   .then(user => {
@@ -54,6 +55,7 @@ router.put('/:id', (req, res, next) => {
    User.update(req.user)    //not sure if this would work?
    .then(user => res.status(201).json(user))
    .catch(next); 
+
 })
 
 // Delete a user

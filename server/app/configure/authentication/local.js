@@ -42,7 +42,7 @@ module.exports = function (app, db) {
             }
 
             // req.logIn will establish our session.
-            req.logIn(user, function (loginErr) {
+            req.logIn(user, function (loginErr) { //persists userId onto session
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
                 res.status(200).send({
