@@ -11,9 +11,9 @@ var ensureAuthenticated = function (req, res, next) {
 };
 
 //Gets all orders associated with one user id
-router.get('/:userid/all', ensureAuthenticated, function(req, res, next) {
-	if (!req.user.admin && req.params.userid !== req.user.id) return res.sendStatus(401);
-	Order.findAll({userId: req.params.userid})
+router.get('/all', ensureAuthenticated, function(req, res, next) {
+	if (!req.user.admin && req.body.userId !== req.user.id) return res.sendStatus(401);
+	Order.findAll({userId: req.body.userId})
 	.then(function (orders) {
 		if (!orders.length) return res.sendStatus(400);
 		else return res.status(200).send(orders);
@@ -24,13 +24,11 @@ router.get('/:userid/all', ensureAuthenticated, function(req, res, next) {
 
 //Gets a single order by id
 router.get('/:id', ensureAuthenticated, function(req, res, next) {
-
+	if (!req.user.admin && req.body.userId !== req.user.id) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function (order) {
 		if (!order) return res.sendStatus(400);
-		else if (req.user.admin || req.user.id === order.userId) return res.status(200).send(order);
-		else return res.sendStatus(401);
-		
+		else return res.status(200).send(order);	
 	})
 	.catch(next);
 });
@@ -46,7 +44,7 @@ router.get('/', ensureAuthenticated, function(req, res, next) {
 
 //Empty Cart or Cancel un-shipped Order
 router.delete('/:id', ensureAuthenticated, function(req,res,next){
-	if (!req.user.admin && req.params.userid !== req.user.id) return res.sendStatus(401);
+	if (!req.user.admin && req.body.userId !== req.user.id) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function(returnedOrder){
 		if (returnedOrder.status === 'cart') {
@@ -73,6 +71,7 @@ router.delete('/:id', ensureAuthenticated, function(req,res,next){
 
 //Change Order Status to "ordered" from "cart" and create a new cart. Return both to front-end.
 router.put('/:id/purchase', ensureAuthenticated, function(req,res,next){
+	if (req.body.userId !== req.user.id) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function(returnedOrder){
 		if (returnedOrder.status !== 'cart') return res.sendStatus(401);
@@ -80,10 +79,10 @@ router.put('/:id/purchase', ensureAuthenticated, function(req,res,next){
 			return returnedOrder.update({status: 'ordered'},{returning:true})
 				.then(function(updatedOrder){
 					return Order.create({})
-				.then(function(newCart){
-					return [updatedOrder, newCart]
+						.then(function(newCart){
+						return [updatedOrder, newCart]
+						})
 				})
-			})
 		}
 	})
 	.catch(next);
