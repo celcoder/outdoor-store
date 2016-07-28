@@ -12,18 +12,20 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
-var isCorrectUser = function() {
-	return (req.body.userId === req.user.id);
+var isCorrectUser = function(req) {
+	console.log("FROM BODY:", req.params.userId, "FROM REQUSER:", req.user.id)
+	return (parseInt(req.params.userId) === req.user.id);
 }
 
-var isAdmin = function() {
+var isAdmin = function(req) {
+	console.log("REQ USER????",req.user);
 	return req.user.admin;
 }
 
 //Gets all orders associated with one user id
-router.get('/all', ensureAuthenticated, function(req, res, next) {
-	if (!isAdmin() && !isCorrectUser()) return res.sendStatus(401);
-	Order.findAll({userId: req.body.userId})
+router.get('/:userId/all', ensureAuthenticated, function(req, res, next) {
+	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
+	Order.findAll({where:{userId: req.params.userId}})
 	.then(function (orders) {
 		if (!orders.length) return res.sendStatus(400);
 		else return res.status(200).send(orders);
@@ -33,8 +35,8 @@ router.get('/all', ensureAuthenticated, function(req, res, next) {
 });
 
 //Gets a single order by id
-router.get('/:id', ensureAuthenticated, function(req, res, next) {
-	if (!isAdmin() && !isCorrectUser()) return res.sendStatus(401);
+router.get('/:userId/:id', ensureAuthenticated, function(req, res, next) {
+	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function (order) {
 		if (!order) return res.sendStatus(400);
@@ -46,16 +48,16 @@ router.get('/:id', ensureAuthenticated, function(req, res, next) {
 
 //Gets all orders in database  ***note: This is an ADMIN privelege!***
 router.get('/', ensureAuthenticated, function(req, res, next) {
-	console.log("******made it here:",req.user);
-	if (!isAdmin()) return res.sendStatus(401);
+	if (!isAdmin(req)) return res.sendStatus(401);
 	Order.findAll({})
 	.then(allOrders => res.status(200).send(allOrders))
 	.catch(next);
 })
 
 //Empty Cart or Cancel un-shipped Order
+//NEED TO FIX CALL TO ISCORRECT BECAUSE REQ.BODY NOT PARAMS
 router.delete('/:id', ensureAuthenticated, function(req,res,next){
-	if (!isAdmin() && !isCorrectUser()) return res.sendStatus(401);
+	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function(returnedOrder){
 		if (returnedOrder.status === 'cart') {
@@ -81,8 +83,8 @@ router.delete('/:id', ensureAuthenticated, function(req,res,next){
 })
 
 //Change Order Status to "ordered" from "cart" and create a new cart. Return both to front-end.
-router.put('/:id/purchase', ensureAuthenticated, function(req,res,next){
-	if (!isCorrectUser()) return res.sendStatus(401);
+router.put('/:userId/:id/purchase', ensureAuthenticated, function(req,res,next){
+	if (!isCorrectUser(req)) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function(returnedOrder){
 		if (returnedOrder.status !== 'cart') return res.sendStatus(401);
@@ -100,8 +102,9 @@ router.put('/:id/purchase', ensureAuthenticated, function(req,res,next){
 })
 
 //Admin change order status req.body must be {status: ''}
+//NEED TO FIX CALL TO ISCORRECT BECAUSE REQ.BODY NOT PARAMS
 router.put('/:id/status', ensureAuthenticated, function(req,res,next){
-	if (!isAdmin()) return res.sendStatus(401);
+	if (!isAdmin(req)) return res.sendStatus(401);
 	Order.update(req.body,{where:{id:req.params.id}, returning: true})
 	.then(function(updatedOrder){
 		return req.status(200).send(updatedOrder);

@@ -7,17 +7,15 @@
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
-            <li ng-show="!item.auth || isLoggedIn()">
-            <a ui-sref-active="active" ui-sref="membersOnly({id: user.id})">{{ account.label }}</a>
-            </li>
             <li>
-            <searchbar></searchbar>
+            <!-- <searchbar></searchbar> -->
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <button ng-show="!user" ui-sref="login" class="welcome btn btn-primary">Login</button>
         <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.first_name }}!</span>
-            <a ng-click="logout()">Logout</a>
+            <span>Welcome, <a ui-sref-active="active" ui-sref="membersOnly({id: user.id})">{{ user.first_name }}!</a></span>
+            <button ui-sref="cart({id: user.id})" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
+            <button class="btn btn-primary"><a ng-click="logout()">Logout</a></button>
         </div>
     </div>
 </nav>
