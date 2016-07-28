@@ -1,0 +1,11 @@
+<table>
+	<th></th><th>Item</th><th>Quantity</th><th>Price</th>
+	<tr ng-repeat="product in singleorder">
+		<td><img ng-src="{{product.photoUrl}}"></td>
+		<td>{{product.name}}</td>
+		<td>{{product.quantity}}</td>
+		<td>{{product.price}}</td>
+	</tr>
+</table>
+
+<button ng-click="seeOrders()"><span>SEE ORDERS in console</span></button>
