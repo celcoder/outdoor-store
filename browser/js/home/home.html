@@ -25,8 +25,9 @@
 <div id="featured" class = "col-xs-12 col-sm-12 col-md-12">
 	<h2>Featured Products</h2>
   <div  ng-repeat="randomProduct in randomProducts" class="col-xs-6 col-md-3">
-
+  	<a ui-sref-active="active" ui-sref="product({id: randomProduct.id})" >
       <img ng-src="{{randomProduct.photoUrl}}" class="img-rounded" height="250" width="200">
+    </a>
       <div class="caption">
         <h4>{{randomProduct.name.split('-')[0]}}</h4>
         
