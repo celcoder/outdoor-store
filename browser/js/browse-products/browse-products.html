@@ -1,0 +1,42 @@
+<div id="browse-products">
+	
+	<div class="row">
+		<div  ng-repeat="product in products" class="col-xs-12 col-sm-6 col-md-4">
+			<!-- <div class="content-container">
+				{{hello}}
+				<img ng-src="{{product.photoUrl}}">
+			</div> -->
+			<div class="thumbnail">
+		      <img ng-src="{{product.photoUrl}}">
+		      <div class="caption">
+		      	<h4>{{product.name.split('-')[0]}}</h4>
+		        <p>{{product.description | limitTo:50}}<span ng-if="product.description.length>50">...</span></p>
+		        <h5>Item {{product.status}}!</h5>
+		        <p><a href="#" class="btn btn-primary" role="button">Product Page</a> <a href="#" class="btn btn-default" role="button">Add to Cart</a></p>
+		      </div>
+		    </div>
+
+		</div>
+	</div>
+
+	
+
+	<!-- <div class="col-xs-12 col-sm-6 col-md-6">
+		<div class="content-container details">
+			<h1>{{product.name}}</h1>
+			<p>{{product.description}}</p>
+			<div class="col-xs-6">
+				<h3>${{product.price}}</h3>
+				<p>{{product.stock}} in stock</p>
+			</div>
+			<div class="col-xs-6">
+				<br>
+				<button ng-click="addToCart()" class="btn btn-primary">Add {{ selectedNum || 1}} to cart</button>
+				<button ng-click="up()"><span class="glyphicon glyphicon-triangle-top"></span></button>
+				<button ng-click="down()"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+			</div>
+		</div>
+	</div> -->
+
+</div>
+
