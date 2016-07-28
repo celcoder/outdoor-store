@@ -44,6 +44,7 @@ module.exports = function (app, db) {
     // When we receive a cookie from the browser, we use that id to set our req.user
     // to a user found in the database.
     passport.deserializeUser(function (id, done) {
+        console.log("HITTING REQ.USER MIDDLEWARE");
         User.findById(id)
             .then(function (user) {
                 done(null, user);

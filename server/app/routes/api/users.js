@@ -52,7 +52,7 @@ router.put('/:id', (req, res, next) => {
   //   })
   //   .then(user => res.json(user))
   //   .catch(next);
-   User.update(req.user)    //not sure if this would work?
+   User.update(req.body, {where:{id:req.params.id}, returning:true})    //not sure if this would work?
    .then(user => res.status(201).json(user))
    .catch(next); 
 

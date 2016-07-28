@@ -37,8 +37,7 @@ describe('Users Route', function () {
 			password: 'shoopdawoop'
 		}];
 
-
-		beforeEach('Create a user', function (done) {
+		beforeEach('Create a user + a loggedInAgent', function (done) {
 			return User.bulkCreate(userInfo).then(function (user) {
                 done();
             }).catch(done);
@@ -74,22 +73,25 @@ describe('Users Route', function () {
 			});
 		});
 
+//RIGHT NOW WE HAVE IT RETURNING PASSWORDS?!?!?!?!?!!?!?!?!?!
+
 		it('can update a user by ID', function (done) {
-			loggedInAgent.put('/api/user/2').send({email: "reedhahayourehacked@zeke.com"}).expect(200).end(function (err, response) {
+			loggedInAgent.put('/api/user/2').send({email: "reedhahayourehacked@zeke.com"}).expect(201).end(function (err, response) {
 				if (err) return done(err);
-				expect(response.body).to.contain({email: 'reedhahayourehacked@zeke.com', password: 'shoopdawoop'});
+				console.log("THIS IS THE RESPONSE:", response.body[1][0]);
+				expect(response.body[1][0]).to.contain({email: 'reedhahayourehacked@zeke.com', password: 'shoopdawoop'});
 				loggedInAgent.get('/api/user/').expect(200).end(function (err, response) {
 					if (err) return done(err);
 					expect(response.body).to.be.an('array');
 					expect(response.body.length).to.be.equal(3);
-					console.log(response.body);
 					expect(response.body[2]).to.contain({email: 'reedhahayourehacked@zeke.com', password: 'shoopdawoop'});
+					done();
 				});
-				done();
 			});
 		});
 
     });
+
 
 });
 
