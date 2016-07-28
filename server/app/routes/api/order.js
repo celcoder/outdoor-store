@@ -22,6 +22,16 @@ var isAdmin = function(req) {
 	return req.user.admin;
 }
 
+//Retrieve or Create a Cart for this user
+router.get('/:userId/cart', ensureAuthenticated, function(req, res, next) {
+	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
+	Order.findOrCreate({where:{userId: req.params.userId, status: 'cart'}})
+	.spread(function (cart, created) {
+		return res.status(200).send(cart);
+	})
+	.catch(next);
+});
+
 //Gets all orders associated with one user id
 router.get('/:userId/all', ensureAuthenticated, function(req, res, next) {
 	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
@@ -31,7 +41,6 @@ router.get('/:userId/all', ensureAuthenticated, function(req, res, next) {
 		else return res.status(200).send(orders);
 	})
 	.catch(next);
-
 });
 
 //Gets a single order by id
