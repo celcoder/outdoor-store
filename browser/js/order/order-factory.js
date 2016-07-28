@@ -14,5 +14,9 @@ app.factory('OrderFactory', function($http, Session, AuthService){
 		return;
 	}
 
+	OrderFactory.updateCart = function(userId, itemId, quantity){
+		
+	}
+
 	return OrderFactory;
 })
