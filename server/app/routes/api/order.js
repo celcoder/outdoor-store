@@ -4,8 +4,10 @@ var router = require('express').Router();
 
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
+    	console.log("USER AUTHENTICATED");
         next();
     } else {
+    	console.log("NOT AUTHENTICATED> AKA BROKEN", req.user);
         res.status(401).end();
     }
 };
@@ -44,6 +46,7 @@ router.get('/:id', ensureAuthenticated, function(req, res, next) {
 
 //Gets all orders in database  ***note: This is an ADMIN privelege!***
 router.get('/', ensureAuthenticated, function(req, res, next) {
+	console.log("******made it here:",req.user);
 	if (!isAdmin()) return res.sendStatus(401);
 	Order.findAll({})
 	.then(allOrders => res.status(200).send(allOrders))
