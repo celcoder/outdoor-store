@@ -140,7 +140,7 @@ router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
 			}
 		})
 		.then(function(){
-			//also update the stock amount
+			//also update the stock amount ***CHANGE THIS TO USE INSTANCE METHOD
 			return Product.update({stock: newStock},{where:{id:req.body.productId}});
 		})
 		.then(function(){
