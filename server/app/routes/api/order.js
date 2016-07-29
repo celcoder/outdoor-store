@@ -44,13 +44,24 @@ router.get('/:userId/all', ensureAuthenticated, function(req, res, next) {
 	.catch(next);
 });
 
+//Gets all orders associated with one user id
+router.get('/:userId/orderhistory', ensureAuthenticated, function(req, res, next) {
+	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
+	Order.findAll({where:{userId: req.params.userId, status: { $ne: 'cart'}}})
+	.then(function (orders) {
+		if (!orders.length) return res.sendStatus(400);
+		else return res.status(200).send(orders);
+	})
+	.catch(next);
+});
+
 //Gets a single order by id
 router.get('/:userId/:id', ensureAuthenticated, function(req, res, next) {
 	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function (order) {
 		if (!order) return res.sendStatus(400);
-		else return res.status(200).send(order);	
+		else return res.status(200).send(order);
 	})
 	.catch(next);
 });
@@ -82,7 +93,7 @@ router.delete('/:id', ensureAuthenticated, function(req,res,next){
 		else if (returnedOrder.status === 'ordered') {
 			return returnedOrder.destroy()
 			.then(function(){
-				return res.status(200).send('Order Deleted'); 
+				return res.status(200).send('Order Deleted');
 			})
 		}
 		else {
@@ -140,7 +151,7 @@ router.put('/:id/status', ensureAuthenticated, function(req,res,next){
 	.catch(next);
 })
 
-//Adding 
+//Adding
 
 
 
