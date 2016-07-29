@@ -1,9 +1,9 @@
-<div class="container">
-	<div ng-show="cart.products.length">
+<div class="container" ng-repeat="order in orderView">
+	<div ng-show="order.products.length">
 		<h3>Your cart:</h3>
 		<table class="cart table">
 			<th>Item</th><th></th><th>Quantity</th><th>Price</th>
-			<tr ng-repeat="product in cart.products">
+			<tr ng-repeat="product in order.products">
 				<td><img ui-sref="product({id: product.id})" ng-src="{{product.photoUrl}}"></td>
 				<td>{{product.name}}</td>
 				<td>{{product.productOrder.quantity}}</td>
@@ -17,8 +17,8 @@
 		</table>
 	</div>
 
-	<div ng-show="!cart.products.length">
-		<h3>Your cart is empty! <a ui-sref="browse">Continue Shopping</a></h3>
-	</div>
 </div>
 
+<div ng-show="!orderView.length">
+	<h3>Your cart is empty! <a ui-sref="browse">Continue Shopping</a></h3>
+</div>

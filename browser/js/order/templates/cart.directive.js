@@ -1,9 +1,11 @@
-app.directive('cart', function () {
+app.directive('order', function () {
 
   return {
     restrict: 'E',
-    scope: {},
-    templateUrl: 'js/order/templates/cart.html'
+    scope: {
+      orderView: '='
+    },
+    templateUrl: 'js/order/templates/order.html'
   }
 
 });
