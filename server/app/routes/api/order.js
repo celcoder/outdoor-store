@@ -1,6 +1,6 @@
 var db = require('../../../db');
 var Order = db.model('order');
-var Product = db.model('order');
+var Product = db.model('product');
 var router = require('express').Router();
 var ProductOrder = db.model('productOrder');
 
@@ -105,44 +105,57 @@ router.delete('/:id', ensureAuthenticated, function(req,res,next){
 })
 
 //Update Quantity of an Item to the Cart with req.body
-//req.body has itemStock, itemId, quantityChange
+//req.body has productStock, productId, quantityChange
 //req.params has userId
 
-router.put(":userId/updateCart", ensureAuthenticated, function(req,res,next){
-	
+router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
+	console.log(req.params.userId, req.body.productId, req.body.quantityChange);
 	//Check that only the correct user can edit the cart
 	if (!isCorrectUser(req)) return res.sendStatus(401);
 
-	//Check if the change in number exceeds stock, and reject request
-	if (req.body.itemStock < req.body.quantityChange) return res.sendStatus(400);
-
-	//variable for what the stock will be.
-	var newStock = req.body.itemStock-req.body.quantityChange;
+	var thisOrder;
+	var newStock;
+	//GET STOCK FROM PRODUCT IN DB, NOT FROM FRONT END.
 	
-	//find Order by UserId and status 'cart'
-	Order.findOne({where:{userId: req.params.userId, status:'cart'}})
-	.then(function(order){
-		//find cartItem by order and itemId
-		return ProductOrder.findOne({where:{itemId:req.body.itemId, orderId: order.id}})
-	})
-	.then(function(cartItem){
-		//if cartItem would zero or less than zero items, remove from cart
-		if (cartItem.quantity+req.body.quantityChange < 1) {
-			return cartItem.destroy()
-		}
-		//else update the number of items
-		else {
-			return cartItem.update({quantity: (cartItem.quantity+req.body.quantityChange)})
-		}
-	})
-	.then(function(){
-		//also update the stock amount
-		return Product.update({stock: newStock},{where:{id:req.body.itemId}});
-	})
-	.then(function(){
-		return res.sendStatus(204);
+	Product.findOne({where:{id:req.body.productId}})
+	.then(function(product){
+		console.log("PRODUCT:", product, "change:", req.body.quantityChange);
+		newStock = product.stock-req.body.quantityChange;
+		//Check if the change in number exceeds stock, and reject request
+		if (newStock < 0) return res.sendStatus(400);
+		
+		//find Order by UserId and status 'cart'
+		Order.findOne({where:{userId: req.params.userId, status:'cart'}})
+		.then(function(order){
+			thisOrder = order;
+			//find cartItem by order and productId
+			return ProductOrder.findOne({where:{productId:req.body.productId, orderId: order.id}})
+		})
+		.then(function(cartItem){
+			//if no cart item already, create it!!
+			if (!cartItem) return thisOrder.addProduct(req.body.productId);
+			//if cartItem would zero or less than zero items, remove from cart
+			if (cartItem.quantity+req.body.quantityChange < 1) {
+				return cartItem.destroy()
+			}
+			//else update the number of items
+			else {
+				return cartItem.update({quantity: (cartItem.quantity+req.body.quantityChange)})
+			}
+		})
+		.then(function(){
+			//also update the stock amount
+			console.log("UPDATING PRODUCT STOCK:", newStock);
+			return Product.update({stock: newStock},{where:{id:req.body.productId}});
+		})
+		.then(function(){
+			return res.sendStatus(204);
+		})
+		.catch(next);
+
 	})
 	.catch(next);
+
 })
 
 

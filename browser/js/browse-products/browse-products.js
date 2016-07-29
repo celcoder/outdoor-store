@@ -11,9 +11,17 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('ProductsCtrl', function ($scope, products) {
-
+app.controller('ProductsCtrl', function ($scope, products, OrderFactory, Session, $state) {
 
 	$scope.products = products;
-	// console.log("Here they ar *****************", $scope.products);
+    
+    $scope.addOneToCart = function(productId){
+        console.log(Session);
+        OrderFactory.updateCart(Session.user.id, productId, 1)
+        .then(function(){
+            $state.go('cart', {'userId': Session.user.id});
+        })
+    }	
+
+
 });
