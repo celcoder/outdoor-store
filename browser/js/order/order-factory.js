@@ -39,7 +39,6 @@ app.factory('OrderFactory', function($http, Session, AuthService){
 	}
 
 	OrderFactory.updateCart = function(userId, productId, quantityChange){
-		console.log(userId, productId, quantityChange);
 		return $http.put("/api/orders/"+userId+"/updateCart", {productId: productId, quantityChange: quantityChange})
 		.then(function(){})
 	}

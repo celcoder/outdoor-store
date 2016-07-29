@@ -6,7 +6,7 @@ app.config(function ($stateProvider) {
         	cart: function(OrderFactory, $stateParams){
         		return OrderFactory.getUserCart($stateParams.id)
         	},
-          orderHistory: function (OrderFactory, $stateParams) {
+          	orderHistory: function (OrderFactory, $stateParams) {
             return OrderFactory.getUserHistory($stateParams.id)
           }
         },

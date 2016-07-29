@@ -6,21 +6,17 @@ var ProductOrder = db.model('productOrder');
 
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
-    	console.log("USER AUTHENTICATED");
         next();
     } else {
-    	console.log("NOT AUTHENTICATED> AKA BROKEN", req.user);
         res.status(401).end();
     }
 };
 
 var isCorrectUser = function(req) {
-	console.log("FROM BODY:", req.params.userId, "FROM REQUSER:", req.user.id)
 	return (parseInt(req.params.userId) === req.user.id);
 }
 
 var isAdmin = function(req) {
-	console.log("REQ USER????",req.user);
 	return req.user.admin;
 }
 
@@ -109,7 +105,6 @@ router.delete('/:id', ensureAuthenticated, function(req,res,next){
 //req.params has userId
 
 router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
-	console.log(req.params.userId, req.body.productId, req.body.quantityChange);
 	//Check that only the correct user can edit the cart
 	if (!isCorrectUser(req)) return res.sendStatus(401);
 
@@ -119,7 +114,6 @@ router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
 	
 	Product.findOne({where:{id:req.body.productId}})
 	.then(function(product){
-		console.log("PRODUCT:", product, "change:", req.body.quantityChange);
 		newStock = product.stock-req.body.quantityChange;
 		//Check if the change in number exceeds stock, and reject request
 		if (newStock < 0) return res.sendStatus(400);
@@ -145,7 +139,6 @@ router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
 		})
 		.then(function(){
 			//also update the stock amount
-			console.log("UPDATING PRODUCT STOCK:", newStock);
 			return Product.update({stock: newStock},{where:{id:req.body.productId}});
 		})
 		.then(function(){
