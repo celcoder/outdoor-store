@@ -25,4 +25,16 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
 
     };
 
+    $scope.sendSignup = function (loginInfo) {
+
+        $scope.error = null;
+
+        AuthService.signup(loginInfo).then(function () {
+            $state.go('home');
+        }).catch(function () {
+            $scope.error = 'Invalid signup credentials.';
+        });
+
+    };
+
 });
