@@ -2,10 +2,10 @@ app.directive('order', function () {
 
   return {
     restrict: 'E',
+    templateUrl: 'js/order/templates/order.html',
     scope: {
       orderView: '='
-    },
-    templateUrl: 'js/order/templates/order.html'
+    }
   }
 
 });

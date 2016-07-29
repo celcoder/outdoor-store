@@ -17,9 +17,9 @@ app.config(function ($stateProvider) {
 app.controller('CartCtrl', function($scope, cart, orderHistory){
 	$scope.cart = [cart];
 	$scope.seeOrders = function(){ console.log("THIS IS THE CART", cart)};
-  	$scope.orderHistory = orderHistory;
+  $scope.orderHistory = orderHistory;
 
-	//subtotal math
+	// subtotal math
 	var prices = cart.products.map(function(product){
 		return parseFloat(product.price);
 	})
@@ -28,8 +28,8 @@ app.controller('CartCtrl', function($scope, cart, orderHistory){
 	})
 	var subtotal = 0;
 	for (var i = 0; i<cart.products.length; i++){
-		subtotal += prices[i]*quantities[i];
+    subtotal += prices[i] * quantities[i];
 	}
-	$scope.subtotal = subtotal;
+	$scope.cart[0].subtotal = subtotal;
 
 })
