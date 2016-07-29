@@ -4,8 +4,15 @@ app.config(function ($stateProvider) {
         url: '/user/:id',
         templateUrl: '/js/members-only/account-info.html' ,
         controller: 'UserCtrl',
-        resolve: { user: function (UserFactory, $stateParams) {
+        resolve: {
+            user: function (UserFactory, $stateParams) {
             return UserFactory.fetchById($stateParams.id)
+            },
+            orderHistory: function (OrderFactory, $stateParams) {
+                return OrderFactory.getUserHistory($stateParams.id)
+            },
+            cart: function (OrderFactory, $stateParams) {
+                return OrderFactory.getUserCart($stateParams.id)
             }
         },
         // The following data.authenticate is read by an event listener
@@ -17,7 +24,10 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('UserCtrl', function ($scope, user) {
+app.controller('UserCtrl', function ($scope, user, orderHistory, cart) {
+
  $scope.user = user;
+ $scope.orderHistory = orderHistory;
+ $scope.cart = cart;
 
 });

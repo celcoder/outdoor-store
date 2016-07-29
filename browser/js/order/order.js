@@ -5,16 +5,20 @@ app.config(function ($stateProvider) {
         resolve: {
         	cart: function(OrderFactory, $stateParams){
         		return OrderFactory.getUserCart($stateParams.id)
-        	}
+        	},
+          orderHistory: function (OrderFactory, $stateParams) {
+            return OrderFactory.getUserHistory($stateParams.id)
+          }
         },
-        controller: 'CartCtrl' 
+        controller: 'CartCtrl'
     });
 });
 
-app.controller('CartCtrl', function($scope, cart){
+app.controller('CartCtrl', function($scope, cart, orderHistory){
 	$scope.cart = cart;
 	$scope.seeOrders = function(){ console.log("THIS IS THE CART", cart)};
-	
+  $scope.orderHistory = orderHistory;
+
 	//subtotal math
 	var prices = cart.products.map(function(product){
 		return parseFloat(product.price);

@@ -9,7 +9,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFactory, $log) {
+app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFactory, $log, OrderFactory) {
 
  	ProductFactory.fetchById($stateParams.id)
 	    .then(function (product) {
@@ -31,6 +31,8 @@ app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFac
 	}
 
 	//unfinished
-	$scope.addToCart = function(){};
+	$scope.addToCart = function(selectedNum){
+    // OrderFactory.
+  };
 
 })
