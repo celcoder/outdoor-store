@@ -1,5 +1,6 @@
 var db = require('../../../db');
 var Order = db.model('order');
+var Product = db.model('order');
 var router = require('express').Router();
 var ProductOrder = db.model('productOrder');
 
@@ -103,21 +104,45 @@ router.delete('/:id', ensureAuthenticated, function(req,res,next){
 	.catch(next);
 })
 
-//Change Item Quantity in the Cart with req.body
-router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
+//Update Quantity of an Item to the Cart with req.body
+//req.body has itemStock, itemId, quantityChange
+//req.params has userId
+
+router.put(":userId/updateCart", ensureAuthenticated, function(req,res,next){
+	
+	//Check that only the correct user can edit the cart
 	if (!isCorrectUser(req)) return res.sendStatus(401);
 
-	if (req.body.quantity === 0) {
-		return ProductOrder.destroy({where:{userId:req.params.id, orderId: req.body.orderId}})
-		.then(function(){
-			return res.sendStatus(204);
-		})
-	}
+	//Check if the change in number exceeds stock, and reject request
+	if (req.body.itemStock < req.body.quantityChange) return res.sendStatus(400);
 
-	ProductOrder.update({quantity: req.body.quantity},{where:{userId:req.params.id, orderId: req.body.orderId}, returning:true})
-	.then(function(productInOrder){
-		return res.status(200).send(productInOrder[1][0]);
+	//variable for what the stock will be.
+	var newStock = req.body.itemStock-req.body.quantityChange;
+	
+	//find Order by UserId and status 'cart'
+	Order.findOne({where:{userId: req.params.userId, status:'cart'}})
+	.then(function(order){
+		//find cartItem by order and itemId
+		return ProductOrder.findOne({where:{itemId:req.body.itemId, orderId: order.id}})
 	})
+	.then(function(cartItem){
+		//if cartItem would zero or less than zero items, remove from cart
+		if (cartItem.quantity+req.body.quantityChange < 1) {
+			return cartItem.destroy()
+		}
+		//else update the number of items
+		else {
+			return cartItem.update({quantity: (cartItem.quantity+req.body.quantityChange)})
+		}
+	})
+	.then(function(){
+		//also update the stock amount
+		return Product.update({stock: newStock},{where:{id:req.body.itemId}});
+	})
+	.then(function(){
+		return res.sendStatus(204);
+	})
+	.catch(next);
 })
 
 
