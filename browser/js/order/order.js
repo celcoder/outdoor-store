@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('cart', {
         url: '/:id/cart/',
-        templateUrl: 'js/order/templates/cart.html',
+        templateUrl: 'js/order/templates/cartpage.html',
         resolve: {
         	cart: function(OrderFactory, $stateParams){
         		return OrderFactory.getUserCart($stateParams.id)

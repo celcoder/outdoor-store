@@ -11,30 +11,10 @@
     </ul>
 
     <h3>Your Cart</h3>
-    <cart></cart>
+    <order order-view="cart"></order>
 
     <h3>Your Order History</h3>
-    <div class="container" ng-repeat="order in orderHistory">
-    <div ng-show="order.products.length">
-    <h3>You Previously Purchased:</h3>
-    <table class="order table">
-      <th>Item</th><th></th><th>Quantity</th><th>Price</th>
-      <tr ng-repeat="product in order.products">
-        <td><img ui-sref="product({id: product.id})" ng-src="{{product.photoUrl}}"></td>
-        <td>{{product.name}}</td>
-        <td>{{product.productOrder.quantity}}</td>
-        <td>{{product.price}}</td>
-      </tr>
-      <tr>
-        <td></td><td></td>
-        <td><strong>Subtotal:</strong></td>
-        <!-- <td><strong>{{subtotal}}</strong></td> -->
-        <!-- refactor later; an order and a cart are identical, so reuse the directive and make it more dynamic -->
-      </tr>
-    </table>
-    </div>
-
-  </div>
+    <order order-view="orderHistory"></order>
 
   </div>
 
