@@ -16,8 +16,6 @@ app.controller('CartCtrl', function($scope, cart, OrderFactory, Session, $state 
 
 	$scope.cart.subtotal = 0;
 
-	console.log($scope.cart);
-
 	// subtotal math
 	var calcSubtotal = function (){
 		if ($scope.cart.products.length){
@@ -38,24 +36,8 @@ app.controller('CartCtrl', function($scope, cart, OrderFactory, Session, $state 
 	calcSubtotal();
 
 
-	$scope.addOneToCart = function(productId){
-        OrderFactory.updateCart(Session.user.id, productId, 1)
-        .then(function(updatedCart){
-        	$scope.cart = updatedCart;
-        	calcSubtotal();
-        })
-    }	
-
-    $scope.removeOneFromCart = function(productId){
-        OrderFactory.updateCart(Session.user.id, productId, -1)
-        .then(function(updatedCart){
-        	$scope.cart = updatedCart;
-        	calcSubtotal();
-        })
-    }
-
-    $scope.removeAllFromCart = function(productId, quantity){
-    	OrderFactory.updateCart(Session.user.id, productId, -quantity)
+    $scope.updateCart = function(productId, quantity){
+    	OrderFactory.updateCart(Session.user.id, productId, quantity)
         .then(function(updatedCart){
         	$scope.cart = updatedCart;
         	calcSubtotal();
