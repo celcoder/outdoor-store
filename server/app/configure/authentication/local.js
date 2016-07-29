@@ -5,6 +5,7 @@ var LocalStrategy = require('passport-local').Strategy;
 module.exports = function (app, db) {
 
     var User = db.model('user');
+    var Order = db.model('order');
 
     // When passport.authenticate('local') is used, this function will receive
     // the email and password to run the actual authentication logic.
@@ -58,6 +59,7 @@ module.exports = function (app, db) {
     });
 
     // A POST /signup route is created to handle login.
+    // This will create a user and an empty cart for that user.
     app.post('/signup', function (req, res, next) {
 
         var authCb = function (err, user) {
@@ -82,6 +84,9 @@ module.exports = function (app, db) {
         };
 
         User.create(req.body)
+        .then(function(user){
+            return Order.create({userId: user.id});
+        })
         .then(function(){
             return passport.authenticate('local', authCb)(req, res, next);
         })

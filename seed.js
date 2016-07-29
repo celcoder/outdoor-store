@@ -31,22 +31,32 @@ var seedUsers = function() {
 
   var users = [{
     email: 'testing@fsa.com',
+    first_name: "Testing",
+    last_name: "This",
     password: 'password',
     admin: false
   }, {
     email: 'obama@gmail.com',
+    first_name: "Barack",
+    last_name: "Obama",
     password: 'potus',
     admin: false
   }, {
     email: 'chris@gmail.com',
+    first_name: "Chris",
+    last_name: "Heller",
     password: 'chris',
     admin: false
   }, {
     email: 'ethan@gmail.com',
+    first_name: "Ethan",
+    last_name: "Lee",
     password: 'ethan',
     admin: true
   }, {
     email: 'zeke@zeke.zeke',
+    first_name: "Zeke",
+    last_name: "Zekerson",
     password: '123',
     admin: true
   }];

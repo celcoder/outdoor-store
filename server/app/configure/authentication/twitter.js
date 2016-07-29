@@ -6,6 +6,7 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 module.exports = function (app, db) {
 
     var User = db.model('user');
+    var Order = db.model('order');
 
     var twitterConfig = app.getValue('env').TWITTER;
 
@@ -20,7 +21,12 @@ module.exports = function (app, db) {
             twitter_id: profile.id,
             first_name: profile.displayName.split(' ')[0],
             last_name: profile.displayName.split(' ')[1]
-        });
+        })
+        .then(function(userToLogin){
+            //Create the User a Cart before returning them.
+            Order.create({userId: userToLogin.id});
+            return userToLogin;
+        })
     };
 
     var verifyCallback = function (token, tokenSecret, profile, done) {

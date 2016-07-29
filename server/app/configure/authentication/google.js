@@ -6,6 +6,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 module.exports = function (app, db) {
 
     var User = db.model('user');
+    var Order = db.model('order');
 
     var googleConfig = app.getValue('env').GOOGLE;
 
@@ -37,6 +38,8 @@ module.exports = function (app, db) {
                 }
             })
             .then(function (userToLogin) {
+                //Create the user a cart
+                Order.create({userId: userToLogin.id});
                 done(null, userToLogin);
             })
             .catch(function (err) {
