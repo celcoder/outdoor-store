@@ -8,7 +8,20 @@
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
             <li>
-            <!-- <searchbar></searchbar> -->
+            
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Browse Products<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a  ui-sref-active="active" ui-sref="gear">Gear</a></li>
+                    <li><a ui-sref-active="active" ui-sref="mens">Men's Apparel</a></li>
+                    <li><a  ui-sref-active="active" ui-sref="womens">Women's Apparel</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a  ui-sref-active="active" ui-sref="browse">All Products</a></li>
+                  </ul>
+                </div>
+            
             </li>
         </ul>
         <button ng-show="!user" ui-sref="login" class="welcome btn btn-primary">Login</button>
