@@ -11,9 +11,8 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('CartCtrl', function($scope, cart ){
+app.controller('CartCtrl', function($scope, cart, OrderFactory, Session, $state ){
 	$scope.cart = cart;
-	
 
 	$scope.cart.subtotal = 0;
 
@@ -31,6 +30,31 @@ app.controller('CartCtrl', function($scope, cart ){
 		}
 		$scope.cart.subtotal = subtotal;
 	}
+
+	$scope.addOneToCart = function(productId){
+        OrderFactory.updateCart(Session.user.id, productId, 1)
+        .then(function(){
+        	$scope.$evalAsync();
+            $state.go('cart', {'id': Session.user.id});
+
+        })
+    }	
+
+    $scope.removeOneFromCart = function(productId){
+        OrderFactory.updateCart(Session.user.id, productId, -1)
+        .then(function(){
+        	$scope.$evalAsync();
+            $state.go('cart', {'id': Session.user.id});
+        })
+    }
+
+    $scope.removeAllFromCart = function(productId, quantity){
+    	OrderFactory.updateCart(Session.user.id, productId, -quantity)
+        .then(function(){
+        	$scope.$evalAsync();
+            $state.go('cart', {'id': Session.user.id});
+        })
+    }
 	
 
 })
