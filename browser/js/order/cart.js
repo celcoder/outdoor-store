@@ -11,7 +11,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('CartCtrl', function($scope, cart, Session){
+app.controller('CartCtrl', function($scope, cart, Session, OrderFactory){
 	$scope.cart = cart;
 
   $scope.user = Session.user;
