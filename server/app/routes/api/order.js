@@ -1,6 +1,7 @@
 var db = require('../../../db');
 var Order = db.model('order');
 var router = require('express').Router();
+var ProductOrder = db.model('productOrder');
 
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -22,6 +23,16 @@ var isAdmin = function(req) {
 	return req.user.admin;
 }
 
+//Retrieve or Create a Cart for this user
+router.get('/:userId/cart', ensureAuthenticated, function(req, res, next) {
+	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
+	Order.findOrCreate({where:{userId: req.params.userId, status: 'cart'}})
+	.spread(function (cart, created) {
+		return res.status(200).send(cart);
+	})
+	.catch(next);
+});
+
 //Gets all orders associated with one user id
 router.get('/:userId/all', ensureAuthenticated, function(req, res, next) {
 	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
@@ -31,7 +42,6 @@ router.get('/:userId/all', ensureAuthenticated, function(req, res, next) {
 		else return res.status(200).send(orders);
 	})
 	.catch(next);
-
 });
 
 //Gets a single order by id
@@ -81,6 +91,24 @@ router.delete('/:id', ensureAuthenticated, function(req,res,next){
 	})
 	.catch(next);
 })
+
+//Change Item Quantity in the Cart with req.body
+router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
+	if (!isCorrectUser(req)) return res.sendStatus(401);
+
+	if (req.body.quantity === 0) {
+		return ProductOrder.destroy({where:{userId:req.params.id, orderId: req.body.orderId}})
+		.then(function(){
+			return res.sendStatus(204);
+		})
+	}
+
+	ProductOrder.update({quantity: req.body.quantity},{where:{userId:req.params.id, orderId: req.body.orderId}, returning:true})
+	.then(function(productInOrder){
+		return res.status(200).send(productInOrder[1][0]);
+	})
+})
+
 
 //Change Order Status to "ordered" from "cart" and create a new cart. Return both to front-end.
 router.put('/:userId/:id/purchase', ensureAuthenticated, function(req,res,next){

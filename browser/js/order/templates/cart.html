@@ -1,11 +1,24 @@
-<table>
-	<th></th><th>Item</th><th>Quantity</th><th>Price</th>
-	<tr ng-repeat="product in singleorder">
-		<td><img ng-src="{{product.photoUrl}}"></td>
-		<td>{{product.name}}</td>
-		<td>{{product.quantity}}</td>
-		<td>{{product.price}}</td>
-	</tr>
-</table>
+<div class="container">
+	<div ng-show="cart.products.length">
+		<h3>Your cart:</h3>
+		<table class="cart table">
+			<th>Item</th><th></th><th>Quantity</th><th>Price</th>
+			<tr ng-repeat="product in cart.products">
+				<td><img ui-sref="product({id: product.id})" ng-src="{{product.photoUrl}}"></td>
+				<td>{{product.name}}</td>
+				<td>{{product.productOrder.quantity}}</td>
+				<td>{{product.price}}</td>
+			</tr>
+			<tr>
+				<td></td><td></td>
+				<td><strong>Subtotal:</strong></td>
+				<td><strong>{{subtotal}}</strong></td>
+			</tr>
+		</table>
+	</div>
 
-<button ng-click="seeOrders()"><span>SEE ORDERS in console</span></button>
+	<div ng-show="!cart.products.length">
+		<h3>Your cart is empty! <a ui-sref="browse">Continue Shopping</a></h3>
+	</div>
+</div>
+
