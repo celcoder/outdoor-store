@@ -30,13 +30,18 @@ module.exports = db.define('product', {
     }
 }, {
     instanceMethods: {
-      removeStock: function(num) {
-          this.stock -= num;
-          if (this.stock < 1) this.setDataValue('status', 'out of stock');
-      },
-      addStock: function(num) {
-          this.stock += num;
-          if (this.getDataValue('status') !== 'available') this.setDataValue('status', 'available');
+      updateStock: function(num) {
+        this.stock = num;
+        if (this.stock < 1) this.setDataValue('status', 'out of stock')
+        if (this.getDataValue('status') !== 'available') this.setDataValue('status', 'available');
       }
+      // removeStock: function(num) {
+      //     this.stock -= num;
+      //     if (this.stock < 1) this.setDataValue('status', 'out of stock');
+      // },
+      // addStock: function(num) {
+      //     this.stock += num;
+      //     if (this.getDataValue('status') !== 'available') this.setDataValue('status', 'available');
+      // }
     }
 })

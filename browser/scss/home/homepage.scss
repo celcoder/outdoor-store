@@ -7,8 +7,24 @@
 
 #featured {
 	text-align: center;
-	display: inline-block;
-    margin-left: auto;
-    margin-right: auto; 
+	.thumbnail {
+		border-radius: 100%;
+		border-style: dashed;
+		border-color: green;
+		overflow: hidden;
+		img {
+			position: center;
+			height: 250px;
+
+			
+		}
+		div {
+			text-align: center;
+		}
+	}
+
+	.row {
+		text-align: center;
+	}
 }
 	
