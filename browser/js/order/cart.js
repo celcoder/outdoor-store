@@ -17,42 +17,46 @@ app.controller('CartCtrl', function($scope, cart, OrderFactory, Session, $state 
 	$scope.cart.subtotal = 0;
 
 	// subtotal math
-	if (cart.products.length){
-		var prices = cart.products.map(function(product){
-			return parseFloat(product.price);
-		})
-		var quantities = cart.products.map(function(product){
-			return product.productOrder.quantity;
-		})
-		var subtotal = 0;
-		for (var i = 0; i<cart.products.length; i++){
-	    	subtotal += prices[i] * quantities[i];
+	var calcSubtotal = function (){
+		if ($scope.cart.products.length){
+			var prices = $scope.cart.products.map(function(product){
+				return parseFloat(product.price);
+			})
+			var quantities = $scope.cart.products.map(function(product){
+				return product.productOrder.quantity;
+			})
+			var subtotal = 0;
+			for (var i = 0; i<$scope.cart.products.length; i++){
+		    	subtotal += prices[i] * quantities[i];
+			}
+			$scope.cart.subtotal = subtotal;
 		}
-		$scope.cart.subtotal = subtotal;
 	}
+
+	calcSubtotal();
+
 
 	$scope.addOneToCart = function(productId){
         OrderFactory.updateCart(Session.user.id, productId, 1)
-        .then(function(){
-        	$scope.$evalAsync();
-            $state.go('cart', {'id': Session.user.id});
-
+        .then(function(updatedCart){
+        	$scope.cart = updatedCart;
+        	calcSubtotal();
         })
     }	
 
     $scope.removeOneFromCart = function(productId){
         OrderFactory.updateCart(Session.user.id, productId, -1)
-        .then(function(){
-        	$scope.$evalAsync();
-            $state.go('cart', {'id': Session.user.id});
+        .then(function(updatedCart){
+        	$scope.cart = updatedCart;
+        	calcSubtotal();
         })
     }
 
     $scope.removeAllFromCart = function(productId, quantity){
     	OrderFactory.updateCart(Session.user.id, productId, -quantity)
-        .then(function(){
-        	$scope.$evalAsync();
-            $state.go('cart', {'id': Session.user.id});
+        .then(function(updatedCart){
+        	$scope.cart = updatedCart;
+        	calcSubtotal();
         })
     }
 	

@@ -9,7 +9,7 @@
 				{{product.productOrder.quantity}}
 				<button ng-click="addOneToCart(product.id)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-top"></span></button>
 				</td>
-				<td>{{product.price}}</td>
+				<td>{{product.price*product.productOrder.quantity}}</td>
 				<td><button ng-click="removeAllFromCart(product.id,product.productOrder.quantity)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td>
 			</tr>
 			<tr>
