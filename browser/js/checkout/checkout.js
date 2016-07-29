@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
 
   $stateProvider.state('checkout', {
-    url: 'user/:id/checkout',
+    url: '/:id/checkout',
     templateUrl: '/js/checkout/checkout.html',
     controller: 'CheckoutCtrl',
     resolve: {
@@ -19,7 +19,7 @@ app.config(function ($stateProvider) {
 app.controller('CheckoutCtrl', function ($scope, user, cart) {
 
  $scope.user = user;
- $scope.cart = [cart];
+ $scope.cart = cart;
 
 });
 
