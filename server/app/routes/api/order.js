@@ -144,7 +144,11 @@ router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
 			return Product.update({stock: newStock},{where:{id:req.body.productId}});
 		})
 		.then(function(){
-			return res.sendStatus(204);
+		//Requery For Updated Order by UserId and status 'cart'
+			return Order.findOne({where:{userId: req.params.userId, status:'cart'}})
+		})
+		.then(function(cart){
+			return res.status(200).send(cart);
 		})
 		.catch(next);
 
