@@ -15,7 +15,7 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('CartCtrl', function($scope, cart, orderHistory){
-	$scope.cart = cart;
+	$scope.cart = [cart];
 	$scope.seeOrders = function(){ console.log("THIS IS THE CART", cart)};
   	$scope.orderHistory = orderHistory;
 

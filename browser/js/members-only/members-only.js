@@ -28,6 +28,6 @@ app.controller('UserCtrl', function ($scope, user, orderHistory, cart) {
 
  $scope.user = user;
  $scope.orderHistory = orderHistory;
- $scope.cart = cart;
+ $scope.cart = [cart];
 
 });
