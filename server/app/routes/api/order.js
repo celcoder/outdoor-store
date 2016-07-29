@@ -127,7 +127,9 @@ router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
 		})
 		.then(function(cartItem){
 			//if no cart item already, create it!!
-			if (!cartItem) return thisOrder.addProduct(req.body.productId);
+			if (!cartItem){
+				return ProductOrder.create({productId: req.body.productId, orderId: thisOrder.id, quantity: req.body.quantityChange})
+			}
 			//if cartItem would zero or less than zero items, remove from cart
 			if (cartItem.quantity+req.body.quantityChange < 1) {
 				return cartItem.destroy()
