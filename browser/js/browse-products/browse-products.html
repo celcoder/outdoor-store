@@ -1,7 +1,7 @@
 <div id="browse-products">
 	
 	<div class="row">
-		<div  ng-repeat="product in products" class="col-xs-12 col-sm-6 col-md-4">
+		<div  ng-repeat="product in products | orderBy : 'name'" class="col-xs-12 col-sm-6 col-md-4">
 			<!-- <div class="content-container">
 				{{hello}}
 				<img ng-src="{{product.photoUrl}}">

@@ -16,6 +16,8 @@ app.controller('CartCtrl', function($scope, cart, OrderFactory, Session, $state 
 
 	$scope.cart.subtotal = 0;
 
+	console.log($scope.cart);
+
 	// subtotal math
 	var calcSubtotal = function (){
 		if ($scope.cart.products.length){
