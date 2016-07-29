@@ -1,12 +1,12 @@
-<div class="container" ng-repeat="order in orderView">
-	<div ng-show="order.products.length">
+<div class="container">
+	<div ng-show="cart.products.length">
 		<table class="cart table">
 			<th>Item</th><th></th><th>Quantity</th><th>Price</th><th>
-			<tr ng-repeat="product in order.products">
+			<tr ng-repeat="product in cart.products">
 				<td><img ui-sref="product({id: product.id})" ng-src="{{product.photoUrl}}"></td>
 				<td>{{product.name}}</td>
 				<td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
-				{{product.productOrder.quantity}}
+				{{product.productcart.quantity}}
 				<button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-top"></span></button>
 				</td>
 				<td>{{product.price}}</td>
@@ -15,12 +15,12 @@
 			<tr>
 				<td></td><td></td>
 				<td><strong>Subtotal:</strong></td>
-				<td><strong>{{ order.subtotal }}</strong></td>
+				<td><strong>{{ cart.subtotal }}</strong></td>
 			</tr>
 		</table>
 	</div>
 
-	<div ng-show="order.status === 'cart' && !order.products.length">
+	<div ng-show="!cart.products.length">
 		<h3>Your cart is empty! <a ui-sref="browse">Continue Shopping</a></h3>
 	</div>
 

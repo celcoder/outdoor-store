@@ -1,8 +1,8 @@
 app.config(function($stateProvider) {
 
-  $stateProvider.state('membersOnly', {
+  $stateProvider.state('account', {
     url: '/user/:id',
-    templateUrl: '/js/members-only/account-info.html',
+    templateUrl: '/js/account/account-info.html',
     controller: 'UserCtrl',
     resolve: {
       user: function(UserFactory, $stateParams) {
@@ -28,7 +28,7 @@ app.controller('UserCtrl', function($scope, user, orderHistory, cart) {
 
   $scope.user = user;
   $scope.orderHistory = orderHistory;
-  $scope.cart = [cart];
+  $scope.cart = cart;
   var prices = cart.products.map(function(product) {
     return parseFloat(product.price);
   })
@@ -39,6 +39,6 @@ app.controller('UserCtrl', function($scope, user, orderHistory, cart) {
   for (var i = 0; i < cart.products.length; i++) {
     subtotal += prices[i] * quantities[i];
   }
-  $scope.cart[0].subtotal = subtotal;
+  $scope.cart.subtotal = subtotal;
 
 });

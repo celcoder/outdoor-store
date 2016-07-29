@@ -1,14 +1,8 @@
-app.directive('order', function () {
+app.directive('cart', function () {
 
   return {
     restrict: 'E',
-    templateUrl: 'js/order/templates/order.html',
-    scope: {
-      orderView: '='
-    }
+    templateUrl: 'js/order/templates/cart.html',
   }
 
 });
-
-
-// this is not done; make it useable for carts and orders

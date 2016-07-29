@@ -26,7 +26,7 @@
         </ul>
         <button ng-show="!user" ui-sref="login" class="welcome btn btn-primary">Login</button>
         <div ng-show="user" class="welcome">
-            <span>Welcome, <a ui-sref-active="active" ui-sref="membersOnly({id: user.id})">{{ user.first_name }}!</a></span>
+            <span>Welcome, <a ui-sref-active="active" ui-sref="account({id: user.id})">{{ user.first_name }}!</a></span>
             <button ui-sref="cart({id: user.id})" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
             <button ng-click="logout()" class="btn btn-primary"><a>Logout</a></button>
         </div>
