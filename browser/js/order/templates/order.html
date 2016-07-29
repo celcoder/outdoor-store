@@ -16,8 +16,9 @@
 		</table>
 	</div>
 
+	<div ng-show="order.status === 'cart' && !order.products.length">
+		<h3>Your cart is empty! <a ui-sref="browse">Continue Shopping</a></h3>
+	</div>
+
 </div>
 
-<div ng-show="!orderView.length && orderView==='cart'">
-	<h3>Your cart is empty! <a ui-sref="browse">Continue Shopping</a></h3>
-</div>
