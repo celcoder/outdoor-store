@@ -27,7 +27,6 @@ app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFac
 		if ($scope.quantity > 1) $scope.quantity--;
 	}
 
-	//unfinished
 	$scope.addToCart = function(){
     	OrderFactory.updateCart(Session.user.id, $scope.product.id, $scope.quantity)
         .then(function(){
