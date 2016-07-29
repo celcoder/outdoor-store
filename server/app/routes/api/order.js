@@ -46,7 +46,7 @@ router.get('/:userId/orderhistory', ensureAuthenticated, function(req, res, next
 	if (!isAdmin(req) && !isCorrectUser(req)) return res.sendStatus(401);
 	Order.findAll({where:{userId: req.params.userId, status: { $ne: 'cart'}}})
 	.then(function (orders) {
-		if (!orders.length) return res.sendStatus(400);
+		if (!orders.length) return res.status(200).send([]);
 		else return res.status(200).send(orders);
 	})
 	.catch(next);
@@ -111,13 +111,13 @@ router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
 	var thisOrder;
 	var newStock;
 	//GET STOCK FROM PRODUCT IN DB, NOT FROM FRONT END.
-	
+
 	Product.findOne({where:{id:req.body.productId}})
 	.then(function(product){
 		newStock = product.stock-req.body.quantityChange;
 		//Check if the change in number exceeds stock, and reject request
 		if (newStock < 0) return res.sendStatus(400);
-		
+
 		//find Order by UserId and status 'cart'
 		Order.findOne({where:{userId: req.params.userId, status:'cart'}})
 		.then(function(order){
