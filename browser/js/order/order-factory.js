@@ -40,6 +40,7 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies){
 	}
 
 	OrderFactory.updateCart = function(product, quantityChange){
+		console.log("The Product:", product);
 		if (AuthService.isAuthenticated()){
 			return $http.put("/api/orders/"+Session.user.id+"/updateCart", {productId: product.id, quantityChange: quantityChange})
 			.then(function(cart){
@@ -62,12 +63,16 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies){
 			//if incrementing product num
 			if (quantityChange > 0){
 				if (cartIdx === -1){
-					//add to cart if not in there
-					product.productOrder = {quantity: quantityChange}
-					cart.products.push(product);
+					//add to cart if not in there BUT ONLY if the product stock exceeds the number you're trying to add
+					if (product.stock >= quantityChange) {
+						product.productOrder = {quantity: quantityChange}
+						cart.products.push(product);
+					}
 				} else {
-					//otherwise just increment the quantity
-					cart.products[cartIdx].productOrder.quantity += quantityChange;
+					//otherwise just increment the quantity BUT ONLY if the stock exceeds the current cart quantity+change
+					if (product.stock >= (cart.products[cartIdx].productOrder.quantity + quantityChange)) {
+						cart.products[cartIdx].productOrder.quantity += quantityChange;
+					}
 				}
 				//Update cookie
 				$cookies.putObject("cart", cart);
