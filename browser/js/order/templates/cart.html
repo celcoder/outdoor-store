@@ -5,12 +5,12 @@
 			<tr ng-repeat="product in cart.products | orderBy : 'name'">
 				<td><img ui-sref="product({id: product.id})" ng-src="{{product.photoUrl}}"></td>
 				<td>{{product.name}}</td>
-				<td><button ng-click="updateCart(product.id, -1)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+				<td><button ng-click="updateCart(product, -1)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
 				{{product.productOrder.quantity}}
-				<button ng-click="updateCart(product.id, 1)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-top"></span></button>
+				<button ng-click="updateCart(product, 1)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-top"></span></button>
 				</td>
 				<td>{{product.price*product.productOrder.quantity}}</td>
-				<td><button ng-click="updateCart(product.id, -product.productOrder.quantity)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td>
+				<td><button ng-click="updateCart(product, -product.productOrder.quantity)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td>
 			</tr>
 			<tr>
 				<td></td><td></td>

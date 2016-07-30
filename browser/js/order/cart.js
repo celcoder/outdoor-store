@@ -1,25 +1,20 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('cart', {
-        url: '/:id/cart/',
+        url: '/cart/',
         templateUrl: 'js/order/templates/cartpage.html',
-        resolve: {
-        	cart: function(OrderFactory, $stateParams){
-        		return OrderFactory.getUserCart($stateParams.id)
-        	}
-        },
+        // resolve: {
+        // 	cart: function(OrderFactory){
+        // 		return OrderFactory.getUserCart()
+        // 	}
+        // },
         controller: 'CartCtrl'
     });
 });
 
-app.controller('CartCtrl', function($scope, cart, Session, OrderFactory){
-	$scope.cart = cart;
+app.controller('CartCtrl', function($scope, OrderFactory){
+	// $scope.cart = cart;
 
-  $scope.user = Session.user;
-
-
-	$scope.cart.subtotal = 0;
-
-	// subtotal math
+// subtotal math
 	var calcSubtotal = function (){
 		if ($scope.cart.products.length){
 			var prices = $scope.cart.products.map(function(product){
@@ -36,11 +31,16 @@ app.controller('CartCtrl', function($scope, cart, Session, OrderFactory){
 		}
 	}
 
-	calcSubtotal();
+	OrderFactory.getUserCart()
+	.then(function(res){
+		$scope.cart = res;
+		calcSubtotal();
+		console.log("USER CART:", res);
+	})
 
 
-    $scope.updateCart = function(productId, quantity){
-    	OrderFactory.updateCart(Session.user.id, productId, quantity)
+    $scope.updateCart = function(product, quantity){
+    	OrderFactory.updateCart(product, quantity)
         .then(function(updatedCart){
         	$scope.cart = updatedCart;
         	calcSubtotal();
