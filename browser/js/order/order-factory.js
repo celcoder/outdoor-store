@@ -1,4 +1,4 @@
-app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies){
+app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, $state){
 
 	var OrderFactory = {};
 
@@ -67,11 +67,14 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies){
 					if (product.stock >= quantityChange) {
 						product.productOrder = {quantity: quantityChange}
 						cart.products.push(product);
+						$state.go('cart');
+
 					}
 				} else {
 					//otherwise just increment the quantity BUT ONLY if the stock exceeds the current cart quantity+change
 					if (product.stock >= (cart.products[cartIdx].productOrder.quantity + quantityChange)) {
 						cart.products[cartIdx].productOrder.quantity += quantityChange;
+						$state.go('cart');
 					}
 				}
 				//Update cookie

@@ -81,9 +81,6 @@ app.controller('ProductsCtrl', function ($scope, products, OrderFactory, Session
     
     $scope.addOneToCart = function(product){
         OrderFactory.updateCart(product, 1)
-        .then(function(){
-            $state.go('cart');
-        })
     }	
 
 
