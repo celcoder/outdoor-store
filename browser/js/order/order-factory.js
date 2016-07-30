@@ -1,4 +1,4 @@
-app.factory('OrderFactory', function($http, Session, AuthService, $q){
+app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies){
 
 	var OrderFactory = {};
 
@@ -18,7 +18,7 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q){
 			})
 		}
 		//NON-AUTH USERS
-		return $q.when(Session.cart);
+		return $q.when($cookies.getObject("cart"));
 	}
 
 	OrderFactory.getAllUserOrders = function (userId) {
@@ -48,10 +48,13 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q){
 		}
 		//For non-auth people
 		else {
+			//Get cart from cookie
+			var cart = $cookies.getObject("cart");
+
 			//find cart Idx of product (Can't use indexOf because quantity on products.productOrder.quantity could differ)
 			var cartIdx = -1;
-			for (var i = 0; i < Session.cart.products.length; i++){
-				if (Session.cart.products[i].id === product.id) {
+			for (var i = 0; i < cart.products.length; i++){
+				if (cart.products[i].id === product.id) {
 					cartIdx = i;
 					break;
 				}
@@ -61,24 +64,28 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q){
 				if (cartIdx === -1){
 					//add to cart if not in there
 					product.productOrder = {quantity: quantityChange}
-					Session.cart.products.push(product);
+					cart.products.push(product);
 				} else {
 					//otherwise just increment the quantity
-					Session.cart.products[cartIdx].productOrder.quantity += quantityChange;
+					cart.products[cartIdx].productOrder.quantity += quantityChange;
 				}
+				//Update cookie
+				$cookies.putObject("cart", cart);
 				//return as promise
-				return $q.when(Session.cart);
+				return $q.when(cart);
 				//else if decreasing product num
 			} else {
 				//if to zero, remove it altogether
-				if (quantityChange + Session.cart.products[cartIdx].productOrder.quantity <= 0) {
-					Session.cart.products.splice(cartIdx, 1);
+				if (quantityChange + cart.products[cartIdx].productOrder.quantity <= 0) {
+					cart.products.splice(cartIdx, 1);
 				} else {
 					//otherwise just decrease the quantity (change is neg number)
-					Session.cart.products[cartIdx].productOrder.quantity += quantityChange;
+					cart.products[cartIdx].productOrder.quantity += quantityChange;
 				}
+				//Update cookie
+				$cookies.putObject("cart", cart);
 				//return as promise
-				return $q.when(Session.cart);
+				return $q.when(cart);
 			}
 			
 		}
