@@ -48,8 +48,14 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q){
 		}
 		//For non-auth people
 		else {
-			//find cart Idx of product
-			var cartIdx = Session.cart.products.indexOf(product);
+			//find cart Idx of product (Can't use indexOf because quantity on products.productOrder.quantity could differ)
+			var cartIdx = -1;
+			for (var i = 0; i < Session.cart.products.length; i++){
+				if (Session.cart.products[i].id === product.id) {
+					cartIdx = i;
+					break;
+				}
+			}
 			//if incrementing product num
 			if (quantityChange > 0){
 				if (cartIdx === -1){
