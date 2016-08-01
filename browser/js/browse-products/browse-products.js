@@ -80,11 +80,7 @@ app.controller('ProductsCtrl', function ($scope, products, OrderFactory, Session
 	//$scope.men = "Men's";
     
     $scope.addOneToCart = function(product){
-        console.log("FROM SRC:", product);
         OrderFactory.updateCart(product, 1)
-        .then(function(){
-            $state.go('cart');
-        })
     }	
 
 

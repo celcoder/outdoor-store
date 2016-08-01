@@ -1,4 +1,4 @@
-app.factory('OrderFactory', function($http, Session, AuthService, $q){
+app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, $state){
 
 	var OrderFactory = {};
 
@@ -18,7 +18,7 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q){
 			})
 		}
 		//NON-AUTH USERS
-		return $q.when(Session.cart);
+		return $q.when($cookies.getObject("cart"));
 	}
 
 	OrderFactory.getAllUserOrders = function (userId) {
@@ -40,6 +40,7 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q){
 	}
 
 	OrderFactory.updateCart = function(product, quantityChange){
+		console.log("The Product:", product);
 		if (AuthService.isAuthenticated()){
 			return $http.put("/api/orders/"+Session.user.id+"/updateCart", {productId: product.id, quantityChange: quantityChange})
 			.then(function(cart){
@@ -48,31 +49,51 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q){
 		}
 		//For non-auth people
 		else {
-			//find cart Idx of product
-			var cartIdx = Session.cart.products.indexOf(product);
+			//Get cart from cookie
+			var cart = $cookies.getObject("cart");
+
+			//find cart Idx of product (Can't use indexOf because quantity on products.productOrder.quantity could differ)
+			var cartIdx = -1;
+			for (var i = 0; i < cart.products.length; i++){
+				if (cart.products[i].id === product.id) {
+					cartIdx = i;
+					break;
+				}
+			}
 			//if incrementing product num
 			if (quantityChange > 0){
 				if (cartIdx === -1){
-					//add to cart if not in there
-					product.productOrder = {quantity: quantityChange}
-					Session.cart.products.push(product);
+					//add to cart if not in there BUT ONLY if the product stock exceeds the number you're trying to add
+					if (product.stock >= quantityChange) {
+						product.productOrder = {quantity: quantityChange}
+						cart.products.push(product);
+						$state.go('cart');
+
+					}
 				} else {
-					//otherwise just increment the quantity
-					Session.cart.products[cartIdx].productOrder.quantity += quantityChange;
+					//otherwise just increment the quantity BUT ONLY if the stock exceeds the current cart quantity+change
+					if (product.stock >= (cart.products[cartIdx].productOrder.quantity + quantityChange)) {
+						cart.products[cartIdx].productOrder.quantity += quantityChange;
+						$state.go('cart');
+					}
 				}
+				//Update cookie
+				$cookies.putObject("cart", cart);
 				//return as promise
-				return $q.when(Session.cart);
+				return $q.when(cart);
 				//else if decreasing product num
 			} else {
 				//if to zero, remove it altogether
-				if (quantityChange + Session.cart.products[cartIdx].productOrder.quantity <= 0) {
-					Session.cart.products.splice(cartIdx, 1);
+				if (quantityChange + cart.products[cartIdx].productOrder.quantity <= 0) {
+					cart.products.splice(cartIdx, 1);
 				} else {
 					//otherwise just decrease the quantity (change is neg number)
-					Session.cart.products[cartIdx].productOrder.quantity += quantityChange;
+					cart.products[cartIdx].productOrder.quantity += quantityChange;
 				}
+				//Update cookie
+				$cookies.putObject("cart", cart);
 				//return as promise
-				return $q.when(Session.cart);
+				return $q.when(cart);
 			}
 			
 		}

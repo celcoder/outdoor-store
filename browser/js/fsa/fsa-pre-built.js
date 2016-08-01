@@ -125,7 +125,6 @@
 
         this.id = null;
         this.user = null;
-        this.cart = {status: "cart", products: [], subtotal: 0};
 
         this.create = function (sessionId, user) {
             this.id = sessionId;
