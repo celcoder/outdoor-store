@@ -188,7 +188,7 @@ router.put('/:id/status', ensureAuthenticated, function(req,res,next){
 	if (!isAdmin(req)) return res.sendStatus(401);
 	Order.update(req.body,{where:{id:req.params.id}, returning: true})
 	.then(function(updatedOrder){
-		return req.status(200).send(updatedOrder);
+		return res.status(200).send(updatedOrder);
 	})
 	.catch(next);
 })

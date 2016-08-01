@@ -1,0 +1,27 @@
+<div class="col-xs-12 col-sm-12 col-md-12">
+	<table class="table table-hover">
+    
+  <thead>
+    <tr>
+      <th>Product #</th>
+      <th>Product Image</th>
+      <th>Product Name</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="product in products | orderBy: -updatedAt">
+      <th scope="row">{{product.id}}</th>
+      <td>
+        <div class="col-xs-2 col-s-2 col-md-2">
+          <a class="thumbnail">
+            <img ng-src="{{product.photoUrl}}">
+          </a>
+        </div>
+      </td>
+      <td>{{product.name}}</td>
+      <td>{{product.quantity}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

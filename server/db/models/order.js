@@ -7,7 +7,7 @@ var db = require('../_db');
 
 module.exports = db.define('order', {
 	status: {
-		type: Sequelize.ENUM('cart', 'ordered', 'shipped', 'delivered'),
+		type: Sequelize.ENUM('cart', 'ordered', 'shipped', 'delivered', 'canceled'),
 		defaultValue: 'cart'
 	},
   street_address: {
