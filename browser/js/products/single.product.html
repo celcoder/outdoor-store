@@ -14,6 +14,7 @@
 			<p>{{product.description}}</p>
 			<div class="col-xs-6">
 				<h3>${{product.price}}</h3>
+				<star-rating ng-model="ratingValue" readonly="true"></star-rating>
 				<p>{{product.stock}} in stock</p>
 			</div>
 			<div class="col-xs-6">
@@ -22,6 +23,44 @@
 				<button ng-click="up()"><span class="glyphicon glyphicon-triangle-top"></span></button>
 				<button ng-click="down()"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
 			</div>
+		</div>
+	</div>
+
+	<div class="col-xs-12">
+		<div class="container reviews">
+
+			<button ng-click="leaveReview=!leaveReview" class="btn">Leave Review</button>
+			<br><br>
+			<form ng-show="leaveReview">
+		      <div class="form-group">
+		      	<star-rating ng-model="newReview.rating"></star-rating>
+		      	<textarea ng-model="newReview.text" class="form-control" rows="5" id="comment"></textarea>
+		      	<button ng-click="submitReview()"><span>Submit</span></button>
+		      </div>
+		    </form>
+
+			<div id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingOne">
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			          Reviews
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+			      <table class="table">
+				<th>Rating</th><th>User</th><th>Review</th>
+				<tr ng-repeat="review in reviews">
+					<td><star-rating ng-model="review.rating" readonly="true"></star-rating></td>
+					<td>{{review.user.first_name}}</td>
+					<td>{{review.text}}</td>
+				</tr>
+			</table>
+			    </div>
+			  </div>
+			 </div>
+
 		</div>
 	</div>
 

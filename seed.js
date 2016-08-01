@@ -23,6 +23,7 @@ var User = db.model('user');
 var Category = db.model('category');
 var Order = db.model('order');
 var Product = db.model('product');
+var Review = db.model('review');
 var _ = require('lodash');
 
 var Promise = require('sequelize').Promise;
@@ -59,6 +60,30 @@ var seedUsers = function() {
     last_name: "Zekerson",
     password: '123',
     admin: true
+  }, {
+    email: 'omri@omri.omri',
+    first_name: "Omri",
+    last_name: "Bernstein",
+    password: '123',
+    admin: true
+  }, {
+    email: 'laura@gmail.com',
+    first_name: "Laura",
+    last_name: "Perkins",
+    password: '123',
+    admin: false
+  }, {
+    email: 'reed@gmail.come',
+    first_name: "Reed",
+    last_name: "Branson",
+    password: 'reed',
+    admin: false
+  }, {
+    email: 'nasser@gmail.come',
+    first_name: "Nasser",
+    last_name: "Abouelazm",
+    password: 'nasser',
+    admin: false
   }];
 
   var creatingUsers = users.map(function(userObj) {
@@ -218,6 +243,43 @@ var seedOrders = () => {
   return Promise.all(creatingOrders) //return the creatingOrders variable.
 };
 
+var createReviews = () => {
+
+  var reviewText = ["It's so nice. That is how I feel about this product. Weeeee", "Such amazing quality. I always love stuff that I buy from this store. It rocks!", "I've seen better. The customer service lady was rude. It's raining outside.", "I had to wait three whole days for my thing to arrive. WAAAAAAH. It's nice though.", "wow! Simply wow!", "Meh! Simply, meh!", "Love what this company is doing. Pretty dang swell stuff if you ask me. Will return to this online retailer!", "I love this product almost as much as the website selling it (WOW WHAT A SITE!)", "This is a review of a product that I may or may not have bought", "WHO EVEN writes product reviews. Especially positive ones? Like... UGH I just want to sit at my computer a while longer and help strangers out with their purchases!"];
+  var randomReviews = [];
+
+  for (var i = 0; i < 200; i++){
+        var randomText = _.sample(reviewText);
+        var randomRating = _.sample([1,2,3,4,5]);
+        randomReviews.push({rating: randomRating, text: randomText})
+      }
+
+    console.log(randomReviews);
+
+  var creatingReviews = randomReviews.map(function(review){
+    var currentReview;
+    return Review.create(review)
+    .then(function(newReview){
+      currentReview = newReview;
+      return Product.findAll({})
+    })
+    .then(function(returnedProducts){
+      return currentReview.setProduct(_.sample(returnedProducts));
+    })
+    .then(function(){
+      return User.findAll({})
+    })
+    .then(function(returnedUsers){
+        return currentReview.setUser(_.sample(returnedUsers));
+    })
+  })
+
+  return Promise.all(creatingReviews);
+  
+}
+
+
+
 db.sync({ force: true })
   .then(function() {
     return seedUsers();
@@ -227,6 +289,9 @@ db.sync({ force: true })
   })
   .then(function() {
     return seedOrders();
+  })
+  .then(function(){
+    return createReviews();
   })
   .then(function() {
     console.log(chalk.green('Seed successful!'));
