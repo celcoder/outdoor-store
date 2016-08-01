@@ -146,7 +146,8 @@ router.put("/:userId/updateCart", ensureAuthenticated, function(req,res,next){
 		})
 		.then(function(){
 			//also update the stock amount ***CHANGE THIS TO USE INSTANCE METHOD
-			return Product.update({stock: newStock},{where:{id:req.body.productId}});
+			if (newStock<1) return Product.update({stock: newStock, status: 'out of stock'},{where:{id:req.body.productId}});
+			return Product.update({stock: newStock, status: 'available'},{where:{id:req.body.productId}});
 		})
 		.then(function(){
 		//Requery For Updated Order by UserId and status 'cart'
