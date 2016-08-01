@@ -1,7 +1,7 @@
 <div class="col-xs-12 col-sm-6 col-md-6">
   <div class="billing-info">
     <h2>Billing Information</h2>
-    <address></address>
+    <address address-view="user"></address>
     <form>
       <div class="form-group">
         <label for="exampleInputEmail1">Credit Card Number</label>
@@ -18,7 +18,7 @@
 
   <div ng-show="showShipping">
     <h2>Shipping Address</h2>
-    <address></address>
+    <address address-view="cart"></address>
   </div>
 
  <button type="submit" class="btn btn-default" ng-click="submitOrder(user.id, cart.id)">Confirm Order</button>

@@ -11,8 +11,9 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('CartCtrl', function($scope, OrderFactory){
+app.controller('CartCtrl', function($scope, OrderFactory, Session){
 	// $scope.cart = cart;
+  $scope.user = Session.user;
 
 // subtotal math
 	var calcSubtotal = function (){
@@ -46,6 +47,6 @@ app.controller('CartCtrl', function($scope, OrderFactory){
         	calcSubtotal();
         })
     }
-	
+
 
 })
