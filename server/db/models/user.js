@@ -19,16 +19,16 @@ module.exports = db.define('user', {
     last_name: {
         type: Sequelize.STRING
     },
-    billing_address: {
+    street_address: {
         type: Sequelize.STRING
     },
-    billing_city: {
+    city: {
         type: Sequelize.STRING
     },
-    billing_state: {
+    state: {
         type: Sequelize.STRING
     },
-    billing_zip: {
+    zip: {
         type: Sequelize.INTEGER
     },
     credit_card_number: {

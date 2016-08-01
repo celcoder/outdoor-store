@@ -13,16 +13,19 @@ module.exports = db.define('order', {
   street_address: {
     type: Sequelize.STRING
   },
-  shipping_name: {
+  first_name: {
     type: Sequelize.STRING
   },
-  shipping_city: {
+  last_name: {
     type: Sequelize.STRING
   },
-  shipping_state: {
+  city: {
     type: Sequelize.STRING
   },
-  shipping_zip: {
+  state: {
+    type: Sequelize.STRING
+  },
+  zip: {
     type: Sequelize.INTEGER
   }
 },
