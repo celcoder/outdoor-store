@@ -1,5 +1,5 @@
 <div class="container" ng-repeat="order in orderHistory">
-	<span>ORDER NUMBER AND STATUS</span>
+	<span>Order number: {{order.id}} was {{order.status}} on {{order.updatedAt}}</span>
 	<div ng-show="order.products.length">
 		<table class="cart table">
 			<th>Item</th><th></th><th>Quantity</th><th>Price</th><th>
