@@ -4,6 +4,11 @@ app.factory('UserFactory', function($http) {
 
   var User = {};
 
+  User.fetchAll = function() {
+    return $http.get('/api/user')
+      .then(getData);
+  }
+
   User.fetchById = function(id) {
     return $http.get('/api/user/' + id)
       .then(getData);
