@@ -113,6 +113,20 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 		}
 	}
 
+	OrderFactory.ship = function(orderId) {
+		return $http.put('/api/orders/' + orderId + '/status', {status: 'shipped'})
+			.then(function (shippedOrder) {
+				return shippedOrder.data;
+			})
+	}
+
+	OrderFactory.cancel = function(orderId) {
+		return $http.put('/api/orders/' + orderId + '/status', {status: 'canceled'})
+			.then(function (canceledOrder) {
+				return canceledOrder.data;
+			})
+	}
+
 	OrderFactory.fetchAll = function() {
 		return $http.get('/api/orders/')
 			.then(function (allOrders) {
