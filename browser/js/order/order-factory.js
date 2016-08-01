@@ -54,10 +54,10 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 	}
 
 	OrderFactory.updateCart = function(product, quantityChange){
-		console.log("The Product:", product);
 		if (AuthService.isAuthenticated()){
 			return $http.put("/api/orders/"+Session.user.id+"/updateCart", {productId: product.id, quantityChange: quantityChange})
 			.then(function(cart){
+				$state.go('cart');
 				return cart.data;
 			})
 		}
