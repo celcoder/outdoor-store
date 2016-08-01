@@ -79,13 +79,8 @@ app.controller('ProductsCtrl', function ($scope, products, OrderFactory, Session
 	$scope.products = products;
 	//$scope.men = "Men's";
     
-    $scope.addOneToCart = function(productId){
-        OrderFactory.updateCart(Session.user.id, productId, 1)
-        .then(function(){
-        	$scope.$evalAsync();
-            $state.go('cart', {'id': Session.user.id});
-
-        })
+    $scope.addOneToCart = function(product){
+        OrderFactory.updateCart(product, 1)
     }	
 
 

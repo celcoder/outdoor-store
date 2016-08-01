@@ -9,7 +9,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFactory, $log, OrderFactory, Session) {
+app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFactory, $log, OrderFactory) {
 
 	$scope.quantity = 1;
 
@@ -28,10 +28,7 @@ app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFac
 	}
 
 	$scope.addToCart = function(){
-    	OrderFactory.updateCart(Session.user.id, $scope.product.id, $scope.quantity)
-        .then(function(){
-            $state.go('cart', {'id': Session.user.id});
-        })
+    	OrderFactory.updateCart($scope.product, $scope.quantity)
     };
 
 })

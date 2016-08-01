@@ -1,7 +1,7 @@
 <div id="browse-products">
 	
 	<div class="row">
-		<div  ng-repeat="product in products" class="col-xs-12 col-sm-6 col-md-4">
+		<div  ng-repeat="product in products | orderBy : 'name'" class="col-xs-12 col-sm-6 col-md-4">
 			<!-- <div class="content-container">
 				{{hello}}
 				<img ng-src="{{product.photoUrl}}">
@@ -12,7 +12,7 @@
 		      	<h4>{{product.name.split('-')[0]}}</h4>
 		        <p>{{product.description | limitTo:50}}<span ng-if="product.description.length>50">...</span></p>
 		        <h5>Item {{product.status}}! <span class="glyphicon glyphicon-tag"></span></h5>
-		        <p><a ui-sref-active="active" ui-sref="product({id: product.id})" class="btn btn-primary" role="button">View Product</a> <a ng-click="addOneToCart(product.id)" class="btn btn-default" role="button">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+		        <p><a ui-sref-active="active" ui-sref="product({id: product.id})" class="btn btn-primary" role="button">View Product</a> <a ng-click="addOneToCart(product)" class="btn btn-default" role="button">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
 		      </div>
 		    </div>
 
