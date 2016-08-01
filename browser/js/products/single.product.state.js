@@ -31,4 +31,6 @@ app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFac
     	OrderFactory.updateCart($scope.product, $scope.quantity)
     };
 
+  $scope.ratingValue = 5;
+
 })

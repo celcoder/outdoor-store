@@ -11,7 +11,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('CartCtrl', function($scope, OrderFactory){
+app.controller('CartCtrl', function($scope, OrderFactory, AuthService){
 	// $scope.cart = cart;
 
 // subtotal math
@@ -31,11 +31,15 @@ app.controller('CartCtrl', function($scope, OrderFactory){
 		}
 	}
 
-	OrderFactory.getUserCart()
-	.then(function(res){
-		$scope.cart = res;
-		calcSubtotal();
-		console.log("USER CART:", res);
+	//Force getting user before trying to get the cart
+	AuthService.getLoggedInUser()
+	.then(function(){
+		OrderFactory.getUserCart()
+		.then(function(res){
+			$scope.cart = res;
+			calcSubtotal();
+			console.log("USER CART:", res);
+		})
 	})
 
 

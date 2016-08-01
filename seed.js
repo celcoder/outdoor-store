@@ -23,6 +23,7 @@ var User = db.model('user');
 var Category = db.model('category');
 var Order = db.model('order');
 var Product = db.model('product');
+var Review = db.model('review');
 var _ = require('lodash');
 
 var Promise = require('sequelize').Promise;
@@ -217,6 +218,20 @@ var seedOrders = () => {
 
   return Promise.all(creatingOrders) //return the creatingOrders variable.
 };
+
+var createReviews = () => {
+
+  var reviewText = ["It's so nice", "Such amazing quality. I always love stuff that I buy from this store. It rocks!", "I've seen better. The customer service lady was rude. It's raining outside.", "I had to wait three whole days for my thing to arrive. WAAAAAAH. It's nice though."]
+
+  var creatingReviews = function(){
+    for (var i = 0; i < 200; i++){
+
+      Review.create()
+      }
+    }
+  }
+
+}
 
 db.sync({ force: true })
   .then(function() {
