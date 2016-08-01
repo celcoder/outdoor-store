@@ -13,6 +13,12 @@ app.config(function($stateProvider) {
       },
       cart: function(OrderFactory, $stateParams) {
         return OrderFactory.getUserCart($stateParams.id)
+      },
+      reviews: function(ReviewFactory,$stateParams){
+            return ReviewFactory.fetchByUserId($stateParams.id)
+                  .then(function (allReviews) {
+                      return allReviews;
+                  })
       }
     },
     // The following data.authenticate is read by an event listener
@@ -24,7 +30,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('UserCtrl', function($scope, user, orderHistory, cart) {
+app.controller('UserCtrl', function($scope, user, orderHistory, cart, reviews) {
 
   $scope.user = user;
   $scope.orderHistory = orderHistory;
@@ -40,5 +46,7 @@ app.controller('UserCtrl', function($scope, user, orderHistory, cart) {
     subtotal += prices[i] * quantities[i];
   }
   $scope.cart.subtotal = subtotal;
+
+  $scope.reviews = reviews;
 
 });

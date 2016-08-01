@@ -1,15 +1,12 @@
 .home {
-    min-height: 400px;
     min-width: 100%; 
-    max-width: 300px; 
-    max-height: 400px;
 }
 
 #featured {
 	text-align: center;
 	.thumbnail {
 		border-radius: 100%;
-		border-style: dashed;
+		border-style: none;
 		border-color: green;
 		overflow: hidden;
 		img {
@@ -27,4 +24,3 @@
 		text-align: center;
 	}
 }
-	

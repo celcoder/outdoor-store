@@ -11,7 +11,7 @@ app.factory('ReviewFactory', function($http, Session) {
 	}
 
 	reviewFactory.fetchByUserId = function(id) {
-		return $http.get('/api/users/' + id + '/reviews')
+		return $http.get('/api/user/' + id + '/reviews')
 		.then(function (reviews) {
 			return reviews.data;
 		})

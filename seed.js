@@ -238,7 +238,7 @@ var random = function(allUsers) {
 
 var seedOrders = () => {
 
-  var orders = [{ status: 'ordered' }, { status: 'shipped' }, { status: 'ordered' }, { status: 'ordered' }, { status: 'shipped' }, { status: 'delivered' }, { status: 'delivered' }, { status: 'delivered' }, { status: 'delivered' }, { status: 'delivered' }, {}, {}, {}, {}, {}, {}, {}, {}];
+  var orders = [{ status: 'ordered' }, { status: 'shipped' }, { status: 'ordered' }, { status: 'ordered' }, { status: 'shipped' }, { status: 'delivered' }, { status: 'delivered' }, { status: 'delivered' }, { status: 'delivered' },{ status: 'ordered' }, { status: 'shipped' }, { status: 'ordered' }, { status: 'ordered' }, { status: 'shipped' }, { status: 'delivered' }, { status: 'delivered' }, { status: 'delivered' }, { status: 'delivered' }, { status: 'delivered' }, {}, {}, {}, {}, {}, {}, {}, {}];
 
   var creatingOrders = orders.map(orderObj => { //iterate through the orders array;
     var order;
