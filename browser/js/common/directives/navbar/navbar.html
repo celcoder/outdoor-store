@@ -1,52 +1,49 @@
 <nav class="navbar navbar-static-top">
-    <div class="navbar-header">
-        <fullstack-logo></fullstack-logo>
-    </div>
-    <div class="container">
-        <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-            </li>
-            <li>
-            
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Browse Products<span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a  ui-sref-active="active" ui-sref="gear">Gear</a></li>
-                    <li><a ui-sref-active="active" ui-sref="mens">Men's Apparel</a></li>
-                    <li><a  ui-sref-active="active" ui-sref="womens">Women's Apparel</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a  ui-sref-active="active" ui-sref="browse">All Products</a></li>
-                  </ul>
-                </div>
-            
-            </li>
-            <li>
 
-                <div class="btn-group">
-                  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Administrator<span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a  ui-sref-active="active" ui-sref="admin-orders">View/Update Orders</a></li>
-                    <li><a ui-sref-active="active" ui-sref="mens">View/Update Users</a></li>
-                    <li><a  ui-sref-active="active" ui-sref="womens">View/Update Products</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a  ui-sref-active="active" ui-sref="browse">All Products</a></li>
-                  </ul>
-                </div>
-            </li>
-        </ul>
-        <div ng-show="!user" class="welcome">
-        <button ui-sref="cart" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
-        <button ui-sref="login" class="btn btn-primary">Login</button>
-        </div>
-        <div ng-show="user" class="welcome">
-            <span>Welcome, <a ui-sref-active="active" ui-sref="account({id: user.id})">{{ user.first_name }}!</a></span>
-            <button ui-sref="cart" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
-            <button ng-click="logout()" class="btn btn-primary"><a>Logout</a></button>
-        </div>
+  <div class="container">
+    <div class="navbar-header">
+      <fullstack-logo></fullstack-logo>
     </div>
+    <ul class="nav navbar-nav">
+      <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+        <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+      </li>
+      <li>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Browse Products<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a ui-sref-active="active" ui-sref="gear">Gear</a></li>
+            <li><a ui-sref-active="active" ui-sref="mens">Men's Apparel</a></li>
+            <li><a ui-sref-active="active" ui-sref="womens">Women's Apparel</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a ui-sref-active="active" ui-sref="browse">All Products</a></li>
+          </ul>
+
+        </div>
+      </li>
+      <li>
+        <div class="btn-group">
+          <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Administrator<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a ui-sref-active="active" ui-sref="admin-orders">View/Update Orders</a></li>
+            <li><a ui-sref-active="active" ui-sref="adminUsers">View/Update Users</a></li>
+            <li><a ui-sref-active="active" ui-sref="adminProducts">View/Update Products</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <div ng-show="!user" class="welcome">
+      <button ui-sref="cart" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
+      <button ui-sref="login" class="btn btn-primary">Login</button>
+    </div>
+    <div ng-show="user" class="welcome">
+      <span>Welcome, <a ui-sref-active="active" ui-sref="account({id: user.id})">{{ user.first_name }}!</a></span>
+      <button ui-sref="cart" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
+      <button ng-click="logout()" class="btn btn-primary"><a>Logout</a></button>
+    </div>
+  </div>
 </nav>

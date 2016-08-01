@@ -1,27 +1,32 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
-	<table class="table table-hover">
-    
-  <thead>
-    <tr>
-      <th>Product #</th>
-      <th>Product Image</th>
-      <th>Product Name</th>
-      <th>Quantity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="product in products | orderBy: -updatedAt">
-      <th scope="row">{{product.id}}</th>
-      <td>
-        <div class="col-xs-2 col-s-2 col-md-2">
-          <a class="thumbnail">
-            <img ng-src="{{product.photoUrl}}">
-          </a>
-        </div>
-      </td>
-      <td>{{product.name}}</td>
-      <td>{{product.quantity}}</td>
-    </tr>
-  </tbody>
-</table>
+
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" ng-click="filterByName()">Sort-By-Name</button>
+    <button type="button" class="btn btn-default" ng-click="filterByStatus()">Sort-By-Status</button>
+    <button type="button" class="btn btn-default" ng-click="filterByQuantity()">Sort-By-Number of Stock</button>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Product-ID#:</th>
+        <th>Product Name</th>
+        <th>Products</th>
+        <th>Product Status</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="product in products">
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.name}}</td>
+        <td>
+          <div class="col-xs-2 col-md-2">
+            <a class="thumbnail"><img ng-src="{{product.photoUrl}}"></a>
+          </div>
+         </td>
+        <td>{{product.status}}</td>
+        <td>{{product.stock}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
