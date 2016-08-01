@@ -14,7 +14,7 @@
 			<p>{{product.description}}</p>
 			<div class="col-xs-6">
 				<h3>${{product.price}}</h3>
-				<star-rating ng-model="ratingValue" readonly="true" on-rating-select="leaveRating(rating)"></star-rating>
+				<star-rating ng-model="ratingValue" readonly="true"></star-rating>
 				<p>{{product.stock}} in stock</p>
 			</div>
 			<div class="col-xs-6">
@@ -27,6 +27,27 @@
 	</div>
 
 	<div class="col-xs-12">
+
+	<button ng-click="leaveReview=!leaveReview" class="btn">Leave Review</button>
+	<br><br>
+	<form ng-show="leaveReview">
+      <div class="form-group">
+      	<star-rating ng-model="newReview.rating"></star-rating>
+      	<textarea ng-model="newReview.text" class="form-control" rows="5" id="comment"></textarea>
+      	<button ng-click="submitReview()"><span>Submit</span></button>
+      </div>
+    </form>
+
+
+        <!-- <label for="exampleInputEmail1">Credit Card Number</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="XXXX-XXXX-XXXX-XXXX">
+        <label for="exampleInputPassword1">Expiration Date</label>
+        <input type="password" id="exampleInputPassword1" placeholder="e.g. 10/18">
+        <label for="exampleInputPassword1">Security Code</label>
+        <input type="password" id="exampleInputPassword1" placeholder="3 digit XXX"> -->
+      </div>
+    </form>
+
 	<h3>Reviews:</h3>
 	<table class="table">
 		<th>Rating</th><th>User</th><th>Review</th>

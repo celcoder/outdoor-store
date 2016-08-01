@@ -16,12 +16,25 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFactory, $log, OrderFactory, reviews) {
+app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFactory, $log, OrderFactory, reviews, ReviewFactory, Session) {
 
   var averageRating = (reviews.map(function(r){return r.rating}).reduce(function(a,b){return a+b}))/reviews.length;
   $scope.ratingValue = averageRating; 
 
   $scope.reviews = reviews;
+
+  $scope.newReview = {rating: 5, text: ""};
+
+  $scope.submitReview = function (){
+    if ($scope.newReview.text === "") return;
+    ReviewFactory.postReview($scope.product.id, $scope.newReview)
+    .then(function(newReview){
+      newReview.user = Session.user
+      $scope.reviews.push(newReview);
+      $scope.leaveReview = false;
+      $scope.newReview = {rating: 5, text: ""};
+    })
+  }
 
 	$scope.quantity = 1;
 

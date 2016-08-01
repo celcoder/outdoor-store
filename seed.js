@@ -60,6 +60,30 @@ var seedUsers = function() {
     last_name: "Zekerson",
     password: '123',
     admin: true
+  }, {
+    email: 'omri@omri.omri',
+    first_name: "Omri",
+    last_name: "Bernstein",
+    password: '123',
+    admin: true
+  }, {
+    email: 'laura@gmail.com',
+    first_name: "Laura",
+    last_name: "Perkins",
+    password: '123',
+    admin: false
+  }, {
+    email: 'reed@gmail.come',
+    first_name: "Reed",
+    last_name: "Branson",
+    password: 'reed',
+    admin: false
+  }, {
+    email: 'nasser@gmail.come',
+    first_name: "Nasser",
+    last_name: "Abouelazm",
+    password: 'nasser',
+    admin: false
   }];
 
   var creatingUsers = users.map(function(userObj) {

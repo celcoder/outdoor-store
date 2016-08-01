@@ -2,12 +2,22 @@ var db = require('../../../db');
 var Product = db.model('product');
 var router = require('express').Router();
 var Review = db.model('review');
+var User = db.model('user');
 
 //get Product reviews by product id
 router.get("/:id/reviews", function(req,res,next){
 	Review.findAll({where:{productId: req.params.id}})
 	.then(function(reviews){
 		return res.status(200).send(reviews);
+	})
+	.catch(next);
+})
+
+//post product review by product id
+router.post("/:id/review/submit", function(req,res,next){
+	Review.create(req.body, {include: User})
+	.then(function(newReview){
+		res.status(200).send(newReview);
 	})
 	.catch(next);
 })
