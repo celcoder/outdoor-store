@@ -1,16 +1,16 @@
 <form>
     <div class="form-group">
       <label for="firstName">First Name</label>
-      <input type="text" class="form-control" id="firstName" placeholder="First Name" value="{{addressView.first_name}}">
+      <input ng-model="addressView.first_name" type="text" class="form-control" id="firstName" placeholder="First Name" value="{{addressView.first_name}}">
       <label for="exampleInputPassword1">Last Name</label>
-      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Last Name" value="{{addressView.last_name}}">
+      <input type="text" ng-model="addressView.last_name" class="form-control" id="exampleInputPassword1" placeholder="Last Name" value="{{addressView.last_name}}">
     </div>
     <div class="form-group">
       <label for="exampleInputFile">Street Address</label>
-      <input type="text" id="exampleInputFile" placeholder="e.g. 123 Alphabet Rd" value="{{addressView.street_address}}">
+      <input type="text" ng-model="addressView.street_address" class="form-control" id="exampleInputFile" placeholder="e.g. 123 Alphabet Rd" value="{{addressView.street_address}}">
       <label for="state" class="control-label">State</label>
-      <select id="state" name="state">
-        <option value="">N/A</option>
+      <select id="state" ng-model="addressView.state" name="state">
+        <option value="">{{addressView.state}}</option>
         <option value="AK">Alaska</option>
         <option value="AL">Alabama</option>
         <option value="AR">Arkansas</option>
@@ -64,10 +64,11 @@
         <option value="WV">West Virginia</option>
         <option value="WY">Wyoming</option>
     </select>
-
+        <label for="city">City</label>
+        <input ng-model="addressView.zip" type="city" id="city" placeholder="e.g., Bethesda" value="{{addressView.city}}">
     </div>
     <div class="form-group">
     <label for="zipcode">Zip Code</label>
-      <input type="zipcode" id="zipcode" placeholder="Zip Code" value="{{addressView.zip}}">
+      <input ng-model="addressView.zip" type="zipcode" id="zipcode" placeholder="Zip Code" value="{{addressView.zip}}">
     </div>
   </form>

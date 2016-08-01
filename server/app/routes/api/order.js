@@ -170,7 +170,7 @@ router.put('/:userId/:id/purchase', ensureAuthenticated, function(req,res,next){
 	.then(function(returnedOrder){
 		if (returnedOrder.status !== 'cart') return res.sendStatus(401);
 		else {
-			return returnedOrder.update({status: 'ordered'},{returning:true})
+			return returnedOrder.update(req.body, {returning:true})
 				.then(function(updatedOrder){
 					return Order.create({})
 						.then(function(newCart){

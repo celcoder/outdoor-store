@@ -21,14 +21,22 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
  $scope.user = user;
  $scope.cart = cart;
  $scope.showShipping = false;
+ $scope.address = {street_address: user.street_address, city: user.city, state: user.state, zip: user.zip, first_name: user.first_name, last_name: user.last_name, status: 'ordered'}
 
  $scope.toggleShipping = function () {
   $scope.showShipping = !$scope.showShipping;
+
+  if ($scope.showShipping === false) {
+    $scope.address = {street_address: user.street_address, city: user.city, state: user.state, zip: user.zip, first_name: user.first_name, last_name: user.last_name, status: 'ordered'}
+  } else {
+    $scope.address = $scope.cart;
+  }
+
  }
 
- $scope.submitOrder = function (userId, cartId) {
+ $scope.submitOrder = function (userId, cartId, address) {
 
-  OrderFactory.purchase(userId, cartId)
+  OrderFactory.purchase(userId, cartId, address)
     .then(function () {})
 
     $state.go('confirmation', {id: userId, orderId: cartId});
