@@ -10,7 +10,7 @@
       <input type="text" ng-model="addressView.street_address" class="form-control" id="exampleInputFile" placeholder="e.g. 123 Alphabet Rd" value="{{addressView.street_address}}">
       <label for="state" class="control-label">State</label>
       <select id="state" ng-model="addressView.state" name="state">
-        <option value="">{{addressView.state}}</option>
+        <option value="{{addressView.state}}">{{addressView.state}}</option>
         <option value="AK">Alaska</option>
         <option value="AL">Alabama</option>
         <option value="AR">Arkansas</option>
@@ -65,7 +65,7 @@
         <option value="WY">Wyoming</option>
     </select>
         <label for="city">City</label>
-        <input ng-model="addressView.zip" type="city" id="city" placeholder="e.g., Bethesda" value="{{addressView.city}}">
+        <input ng-model="addressView.city" type="city" id="city" placeholder="e.g. Bethesda" value="{{addressView.city}}">
     </div>
     <div class="form-group">
     <label for="zipcode">Zip Code</label>

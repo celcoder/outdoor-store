@@ -36,6 +36,8 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
 
  $scope.submitOrder = function (userId, cartId, address) {
 
+  $scope.cart.status = "ordered";
+
   OrderFactory.purchase(userId, cartId, address)
     .then(function () {})
 
