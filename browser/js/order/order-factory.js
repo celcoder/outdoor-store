@@ -39,6 +39,20 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 		}
 	}
 
+	OrderFactory.purchase = function (userId, orderId) {
+		return $http.put('/api/orders/' +userId+ "/" + orderId + '/purchase')
+			.then(function (array) {
+				return [array[0].data, array[1].data];
+			})
+	},
+
+	OrderFactory.fetchById = function (userId, orderId) {
+		return $http.get('/api/orders/' + userId + "/" + orderId)
+			.then(function (order) {
+				return order.data;
+			})
+	}
+
 	OrderFactory.updateCart = function(product, quantityChange){
 		console.log("The Product:", product);
 		if (AuthService.isAuthenticated()){
