@@ -1,5 +1,5 @@
 <div class="col-xs-12 col-sm-6 col-md-6">
-  <div>
+  <div class="billing-info">
     <h2>Billing Information</h2>
     <address></address>
     <form>
@@ -14,9 +14,10 @@
     </form>
   </div>
 
-  <div>
+  <button type="submit" class="btn btn-default" ng-click="toggleShipping()">Different Shipping Address?</button>
+
+  <div ng-show="showShipping">
     <h2>Shipping Address</h2>
-    <button type="submit" class="btn btn-default">Shipping Address is the Same as Billing Address</button>
     <address></address>
   </div>
 
@@ -27,5 +28,20 @@
 </div>
 
 <div class="col-xs-12 col-sm-4 col-md-4">
-  This is where an abridged cart view will go
+  <table class="cart table checkout">
+      <th>Item</th><th></th><th>Quantity</th><th>Price</th><th>
+      <tr ng-repeat="product in cart.products">
+        <td><img ui-sref="product({id: product.id})" ng-src="{{product.photoUrl}}"></td>
+        <td>{{product.name}}</td>
+        <td>
+        {{product.productcart.quantity}}
+        </td>
+        <td>{{product.price}}</td>
+      </tr>
+      <tr>
+        <td></td><td></td>
+        <td><strong>Subtotal:</strong></td>
+        <td><strong>{{ cart.subtotal }}</strong></td>
+      </tr>
+    </table>
 </div>
