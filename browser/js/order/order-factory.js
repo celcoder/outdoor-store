@@ -99,5 +99,12 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 		}
 	}
 
+	OrderFactory.fetchAll = function() {
+		return $http.get('/api/orders/')
+			.then(function (allOrders) {
+				return allOrders.data;
+			})
+	}
+
 	return OrderFactory;
 })

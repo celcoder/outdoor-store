@@ -1,0 +1,21 @@
+<div class="col-xs-12 col-sm-12 col-md-12">
+	<table class="table table-hover">
+    
+  <thead>
+    <tr>
+      <th>Order #</th>
+      <th>User Email</th>
+      <th>Updated</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="order in orders | orderBy: -updatedAt">
+      <th scope="row">{{order.id}}</th>
+      <td>{{order.user.email}}</td>
+      <td>{{order.updatedAt | date : 'medium'}}</td>
+      <td>{{order.status}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

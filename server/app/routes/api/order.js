@@ -3,6 +3,7 @@ var Order = db.model('order');
 var Product = db.model('product');
 var router = require('express').Router();
 var ProductOrder = db.model('productOrder');
+var User = db.model('user');
 
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -67,7 +68,11 @@ router.get('/:userId/:id', ensureAuthenticated, function(req, res, next) {
 //Gets all orders in database  ***note: This is an ADMIN privelege!***
 router.get('/', ensureAuthenticated, function(req, res, next) {
 	if (!isAdmin(req)) return res.sendStatus(401);
-	Order.findAll({})
+	Order.findAll({
+		include: [
+			{model: User}
+		]
+	})
 	.then(allOrders => res.status(200).send(allOrders))
 	.catch(next);
 })
