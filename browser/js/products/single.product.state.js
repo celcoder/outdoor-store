@@ -3,13 +3,25 @@ app.config(function($stateProvider) {
   $stateProvider.state('product', {
     url: '/product/:id',
     templateUrl: 'js/products/single.product.html',
+    resolve: {
+         reviews: function(ReviewFactory,$stateParams){
+            return ReviewFactory.fetchByProductId($stateParams.id)
+                  .then(function (allReviews) {
+                      return allReviews;
+                  })
+         }
+        },
     controller: 'ProductCtrl'
   })
 
-
 });
 
-app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFactory, $log, OrderFactory) {
+app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFactory, $log, OrderFactory, reviews) {
+
+  var averageRating = (reviews.map(function(r){return r.rating}).reduce(function(a,b){return a+b}))/reviews.length;
+  $scope.ratingValue = averageRating; 
+
+  $scope.reviews = reviews;
 
 	$scope.quantity = 1;
 
@@ -31,6 +43,11 @@ app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFac
     	OrderFactory.updateCart($scope.product, $scope.quantity)
     };
 
-  $scope.ratingValue = 5;
+  // ReviewFactory.fetchByProductId($stateParams.id)
+  // .then(function (allReviews) {
+  //     $scope.reviews = allReviews;
+  //     var averageRating = (allReviews.map(function(r){return r.rating}).reduce(function(a,b){return a+b}))/allReviews.length;
+  //     $scope.ratingValue = averageRating; 
+  // })
 
 })

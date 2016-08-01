@@ -1,6 +1,7 @@
 'use strict';
 var Sequelize = require('sequelize');
-
+var Product = require('./product');
+var User = require('./user');
 var db = require('../_db');
 
 module.exports = db.define('review', {
@@ -12,4 +13,10 @@ module.exports = db.define('review', {
 		}
 	},
 	text: Sequelize.TEXT
-});
+},
+{
+	defaultScope: {
+		include: [Product, User]
+	}
+}
+);

@@ -2,11 +2,6 @@ app.config(function ($stateProvider) {
     $stateProvider.state('cart', {
         url: '/cart/',
         templateUrl: 'js/order/templates/cartpage.html',
-        // resolve: {
-        // 	cart: function(OrderFactory){
-        // 		return OrderFactory.getUserCart()
-        // 	}
-        // },
         controller: 'CartCtrl'
     });
 });

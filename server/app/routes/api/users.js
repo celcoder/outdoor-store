@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var db = require('../../../db');
 var User = db.model('user');
+var Review = db.model('review');
 
 //<-------- another solution to error handling plus making our routers lean -------->//
 router.param('id', (req, res, next, id) => {
@@ -15,6 +16,15 @@ router.param('id', (req, res, next, id) => {
     })
     .catch(next);
 });
+
+//get Product reviews by user id
+router.get("/:id/reviews", function(req,res,next){
+  Review.findAll({where:{userId: req.params.id}})
+  .then(function(reviews){
+    return res.status(200).send(reviews);
+  })
+  .catch(next);
+})
 
 
 // Get all users

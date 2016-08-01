@@ -1,6 +1,16 @@
 var db = require('../../../db');
 var Product = db.model('product');
 var router = require('express').Router();
+var Review = db.model('review');
+
+//get Product reviews by product id
+router.get("/:id/reviews", function(req,res,next){
+	Review.findAll({where:{productId: req.params.id}})
+	.then(function(reviews){
+		return res.status(200).send(reviews);
+	})
+	.catch(next);
+})
 
 //get Product by id
 router.get('/:id', function(req,res,next){

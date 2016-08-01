@@ -221,17 +221,40 @@ var seedOrders = () => {
 
 var createReviews = () => {
 
-  var reviewText = ["It's so nice", "Such amazing quality. I always love stuff that I buy from this store. It rocks!", "I've seen better. The customer service lady was rude. It's raining outside.", "I had to wait three whole days for my thing to arrive. WAAAAAAH. It's nice though."]
+  var reviewText = ["It's so nice. That is how I feel about this product. Weeeee", "Such amazing quality. I always love stuff that I buy from this store. It rocks!", "I've seen better. The customer service lady was rude. It's raining outside.", "I had to wait three whole days for my thing to arrive. WAAAAAAH. It's nice though.", "wow! Simply wow!", "Meh! Simply, meh!"];
+  var randomReviews = [];
 
-  var creatingReviews = function(){
-    for (var i = 0; i < 200; i++){
-
-      Review.create()
+  for (var i = 0; i < 200; i++){
+        var randomText = _.sample(reviewText);
+        var randomRating = _.sample([1,2,3,4,5]);
+        randomReviews.push({rating: randomRating, text: randomText})
       }
-    }
-  }
 
+    console.log(randomReviews);
+
+  var creatingReviews = randomReviews.map(function(review){
+    var currentReview;
+    return Review.create(review)
+    .then(function(newReview){
+      currentReview = newReview;
+      return Product.findAll({})
+    })
+    .then(function(returnedProducts){
+      return currentReview.setProduct(_.sample(returnedProducts));
+    })
+    .then(function(){
+      return User.findAll({})
+    })
+    .then(function(returnedUsers){
+        return currentReview.setUser(_.sample(returnedUsers));
+    })
+  })
+
+  return Promise.all(creatingReviews);
+  
 }
+
+
 
 db.sync({ force: true })
   .then(function() {
@@ -242,6 +265,9 @@ db.sync({ force: true })
   })
   .then(function() {
     return seedOrders();
+  })
+  .then(function(){
+    return createReviews();
   })
   .then(function() {
     console.log(chalk.green('Seed successful!'));

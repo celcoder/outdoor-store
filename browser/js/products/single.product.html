@@ -14,7 +14,7 @@
 			<p>{{product.description}}</p>
 			<div class="col-xs-6">
 				<h3>${{product.price}}</h3>
-				<star-rating ng-model="ratingValue" readonly="rating.isReadonly"></star-rating>
+				<star-rating ng-model="ratingValue" readonly="true" on-rating-select="leaveRating(rating)"></star-rating>
 				<p>{{product.stock}} in stock</p>
 			</div>
 			<div class="col-xs-6">
@@ -24,6 +24,18 @@
 				<button ng-click="down()"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
 			</div>
 		</div>
+	</div>
+
+	<div class="col-xs-12">
+	<h3>Reviews:</h3>
+	<table class="table">
+		<th>Rating</th><th>User</th><th>Review</th>
+		<tr ng-repeat="review in reviews">
+			<td><star-rating ng-model="review.rating" readonly="true"></star-rating></td>
+			<td>{{review.user.first_name}}</td>
+			<td>{{review.text}}</td>
+		</tr>
+	</table>
 	</div>
 
 </div>
