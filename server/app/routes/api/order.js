@@ -170,7 +170,7 @@ router.put('/:userId/:id/purchase', ensureAuthenticated, function(req,res,next){
 	.then(function(returnedOrder){
 		if (returnedOrder.status !== 'cart') return res.sendStatus(401);
 		else {
-			return returnedOrder.update({status: 'ordered'},{returning:true})
+			return returnedOrder.update(req.body, {returning:true})
 				.then(function(updatedOrder){
 					return Order.create({})
 						.then(function(newCart){
@@ -188,7 +188,7 @@ router.put('/:id/status', ensureAuthenticated, function(req,res,next){
 	if (!isAdmin(req)) return res.sendStatus(401);
 	Order.update(req.body,{where:{id:req.params.id}, returning: true})
 	.then(function(updatedOrder){
-		return req.status(200).send(updatedOrder);
+		return res.status(200).send(updatedOrder);
 	})
 	.catch(next);
 })

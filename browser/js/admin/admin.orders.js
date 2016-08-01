@@ -1,21 +1,46 @@
 app.config(function($stateProvider) {
-  $stateProvider.state('admin', {
-    url: '/admin/orders',
+  $stateProvider.state('admin-orders', {
+    url: '/admin/orders/',
     templateUrl: 'js/admin/admin-orders.html',
-    controller: 'AdminCtrl',
+    controller: 'AdminOrdersCtrl',
     resolve: {
       orders: function(OrderFactory) {
         return OrderFactory.fetchAll();
       }
     }
-  });
+  })
 });
 
-app.controller('AdminCtrl', function($scope, orders, $filter) {
+app.controller('AdminOrdersCtrl', function($scope, orders, $filter, OrderFactory) {
+ 
 
-  $scope.orders = orders.filter(function(order) {
+  $scope.allOrders = orders.filter(function(order) {
     return order.status !== 'cart';
   });
+  
+  $scope.orders = $scope.allOrders;
+  
+  $scope.ordersToBeShipped = $scope.allOrders.filter(function(order) {
+    return order.status === 'ordered';
+  })
+
+
+  if ($scope.ordersToBeShipped.length) {
+    $scope.main = true;
+  } else {
+    $scope.main = false;
+  }
+
+  $scope.viewAll = function() {
+    $scope.main = false;
+    $scope.orders = $scope.allOrders;
+  }
+
+  $scope.viewOrdered = function() {
+    $scope.main = false;
+    $scope.orders = $scope.ordersToBeShipped;
+  }
+
 
   var upDown = 'id';
   var status = 'status';
@@ -30,6 +55,18 @@ app.controller('AdminCtrl', function($scope, orders, $filter) {
       $scope.orders = $filter('orderBy')($scope.orders, upDown);
     }
 
+  }
+
+  $scope.ship = OrderFactory.ship;
+  $scope.shipUpdate = function(order) {
+    order.status = 'shipped';
+    $scope.ordersToBeShipped.splice($scope.ordersToBeShipped.indexOf(order), 1);
+  }
+
+  $scope.cancel = OrderFactory.cancel;
+  $scope.cancelUpdate = function(order) {
+    order.status = 'canceled';
+    $scope.ordersToBeShipped.splice($scope.ordersToBeShipped.indexOf(order), 1);
   }
 
   $scope.orderDate = function() {

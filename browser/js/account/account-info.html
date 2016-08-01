@@ -10,15 +10,37 @@
       <li>Payment</li>
     </ul>
 
-    <h3>Your Cart</h3>
-    <cart></cart>
+  </div>
 
-    <h3 ng-show="orderHistory.length">Your Order History</h3>
-    <order-history></order-history>
-
+  <div class="col-xs-12 col-sm-6 col-md-6" ng-show="reviews.length">
+    <h3>Recent Product Reviews</h3>
+    <div id="user-reviews">
+      <div id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Reviews
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <table class="table">
+          <th width="140px">Rating</th><th>Review</th>
+          <tr ng-repeat="review in reviews">
+            <td><star-rating ng-model="review.rating" readonly="true"></star-rating></td>
+            <td>{{review.text}}</td>
+          </tr>
+        </table>
+            </div>
+          </div>
+          </div>
+    </div>
   </div>
 
   <div class="col-xs-12 col-sm-6 col-md-6">
-  <h2>Recent Product Reviews</h2>
+    <h3 ng-show="orderHistory.length">Your Order History</h3>
+      <order-history></order-history>
   </div>
+
 </div>

@@ -1,0 +1,28 @@
+<div id="single-product">
+
+	<div class="col-xs-12 col-sm-6 col-md-6">
+		<div class="content-container">
+			<img ng-src="{{product.photoUrl}}">
+		</div>
+
+	</div>
+
+
+	<div class="col-xs-12 col-sm-6 col-md-6">
+		<div class="content-container details">
+			<h1>{{product.name}}</h1>
+			<p>{{product.description}}</p>
+			<div class="col-xs-6">
+				<h3>${{product.price}}</h3>
+				<p>{{product.stock}} in stock</p>
+			</div>
+			<div class="col-xs-6">
+				<br>
+				<button ng-click="addToCart()" class="btn btn-primary">Add {{ quantity }} to cart</button>
+				<button ng-click="up()"><span class="glyphicon glyphicon-triangle-top"></span></button>
+				<button ng-click="down()"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+			</div>
+		</div>
+	</div>
+
+</div>
