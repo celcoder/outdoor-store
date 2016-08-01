@@ -57,10 +57,25 @@ app.controller('AdminOrdersCtrl', function($scope, orders, $filter, OrderFactory
 
   }
 
+  $scope.shipAll = OrderFactory.shipAll;
+
   $scope.ship = OrderFactory.ship;
   $scope.shipUpdate = function(order) {
     order.status = 'shipped';
     $scope.ordersToBeShipped.splice($scope.ordersToBeShipped.indexOf(order), 1);
+  }
+
+  $scope.bulkUpdate = function() {
+    $scope.ordersToBeShipped = $scope.ordersToBeShipped.map(function(order) {
+      order.status = 'shipped';
+      return order;
+    })
+    $scope.allOrders = $scope.allOrders.map(function(order) {
+      if (order.status === 'ordered') {
+        order.status = 'shipped';
+      }
+      return order;
+    })
   }
 
   $scope.cancel = OrderFactory.cancel;

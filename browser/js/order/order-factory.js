@@ -120,6 +120,13 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 			})
 	}
 
+	OrderFactory.shipAll = function() {
+		return $http.put('/api/orders/shipall', {status: 'shipped'})
+			.then(function (shippedOrders) {
+				return shippedOrders.data;
+			})
+	}
+
 	OrderFactory.cancel = function(orderId) {
 		return $http.put('/api/orders/' + orderId + '/status', {status: 'canceled'})
 			.then(function (canceledOrder) {
