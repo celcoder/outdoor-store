@@ -35,30 +35,50 @@ var seedUsers = function() {
     first_name: "Testing",
     last_name: "This",
     password: 'password',
+    street_address: '5 Hanover Square',
+    city: 'New York',
+    state: 'New York',
+    zip: '10002',
     admin: false
   }, {
     email: 'obama@gmail.com',
     first_name: "Barack",
     last_name: "Obama",
     password: 'potus',
+    street_address: '5 Hanover Square',
+    city: 'New York',
+    state: 'New York',
+    zip: '10002',
     admin: false
   }, {
     email: 'chris@gmail.com',
     first_name: "Chris",
     last_name: "Heller",
     password: 'chris',
+    street_address: '5 Hanover Square',
+    city: 'New York',
+    state: 'New York',
+    zip: '10002',
     admin: false
   }, {
     email: 'ethan@gmail.com',
     first_name: "Ethan",
     last_name: "Lee",
     password: 'ethan',
+    street_address: '5 Hanover Square',
+    city: 'New York',
+    state: 'New York',
+    zip: '10002',
     admin: true
   }, {
     email: 'zeke@zeke.zeke',
     first_name: "Zeke",
     last_name: "Zekerson",
     password: '123',
+    street_address: '5 Hanover Square',
+    city: 'New York',
+    state: 'New York',
+    zip: '10002',
     admin: true
   }, {
     email: 'omri@omri.omri',

@@ -39,12 +39,12 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 		}
 	}
 
-	OrderFactory.purchase = function (userId, orderId) {
-		return $http.put('/api/orders/' +userId+ "/" + orderId + '/purchase')
+	OrderFactory.purchase = function (userId, orderId, address) {
+		return $http.put('/api/orders/' +userId+ "/" + orderId + '/purchase', address)
 			.then(function (array) {
 				return [array[0].data, array[1].data];
 			})
-	},
+	}
 
 	OrderFactory.fetchById = function (userId, orderId) {
 		return $http.get('/api/orders/' + userId + "/" + orderId)
@@ -109,7 +109,7 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 				//return as promise
 				return $q.when(cart);
 			}
-			
+
 		}
 	}
 
