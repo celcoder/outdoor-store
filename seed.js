@@ -245,7 +245,7 @@ var seedOrders = () => {
 
 var createReviews = () => {
 
-  var reviewText = ["It's so nice. That is how I feel about this product. Weeeee", "Such amazing quality. I always love stuff that I buy from this store. It rocks!", "I've seen better. The customer service lady was rude. It's raining outside.", "I had to wait three whole days for my thing to arrive. WAAAAAAH. It's nice though.", "wow! Simply wow!", "Meh! Simply, meh!"];
+  var reviewText = ["It's so nice. That is how I feel about this product. Weeeee", "Such amazing quality. I always love stuff that I buy from this store. It rocks!", "I've seen better. The customer service lady was rude. It's raining outside.", "I had to wait three whole days for my thing to arrive. WAAAAAAH. It's nice though.", "wow! Simply wow!", "Meh! Simply, meh!", "Love what this company is doing. Pretty dang swell stuff if you ask me. Will return to this online retailer!", "I love this product almost as much as the website selling it (WOW WHAT A SITE!)", "This is a review of a product that I may or may not have bought", "WHO EVEN writes product reviews. Especially positive ones? Like... UGH I just want to sit at my computer a while longer and help strangers out with their purchases!"];
   var randomReviews = [];
 
   for (var i = 0; i < 200; i++){

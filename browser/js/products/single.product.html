@@ -27,36 +27,41 @@
 	</div>
 
 	<div class="col-xs-12">
+		<div class="container reviews">
 
-	<button ng-click="leaveReview=!leaveReview" class="btn">Leave Review</button>
-	<br><br>
-	<form ng-show="leaveReview">
-      <div class="form-group">
-      	<star-rating ng-model="newReview.rating"></star-rating>
-      	<textarea ng-model="newReview.text" class="form-control" rows="5" id="comment"></textarea>
-      	<button ng-click="submitReview()"><span>Submit</span></button>
-      </div>
-    </form>
+			<button ng-click="leaveReview=!leaveReview" class="btn">Leave Review</button>
+			<br><br>
+			<form ng-show="leaveReview">
+		      <div class="form-group">
+		      	<star-rating ng-model="newReview.rating"></star-rating>
+		      	<textarea ng-model="newReview.text" class="form-control" rows="5" id="comment"></textarea>
+		      	<button ng-click="submitReview()"><span>Submit</span></button>
+		      </div>
+		    </form>
 
+			<div id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingOne">
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			          Reviews
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+			      <table class="table">
+				<th>Rating</th><th>User</th><th>Review</th>
+				<tr ng-repeat="review in reviews">
+					<td><star-rating ng-model="review.rating" readonly="true"></star-rating></td>
+					<td>{{review.user.first_name}}</td>
+					<td>{{review.text}}</td>
+				</tr>
+			</table>
+			    </div>
+			  </div>
+			 </div>
 
-        <!-- <label for="exampleInputEmail1">Credit Card Number</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="XXXX-XXXX-XXXX-XXXX">
-        <label for="exampleInputPassword1">Expiration Date</label>
-        <input type="password" id="exampleInputPassword1" placeholder="e.g. 10/18">
-        <label for="exampleInputPassword1">Security Code</label>
-        <input type="password" id="exampleInputPassword1" placeholder="3 digit XXX"> -->
-      </div>
-    </form>
-
-	<h3>Reviews:</h3>
-	<table class="table">
-		<th>Rating</th><th>User</th><th>Review</th>
-		<tr ng-repeat="review in reviews">
-			<td><star-rating ng-model="review.rating" readonly="true"></star-rating></td>
-			<td>{{review.user.first_name}}</td>
-			<td>{{review.text}}</td>
-		</tr>
-	</table>
+		</div>
 	</div>
 
 </div>
