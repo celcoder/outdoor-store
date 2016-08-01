@@ -45,6 +45,7 @@ app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFac
     .catch($log);
 
 	$scope.up = function(){
+    if ($scope.quantity >= $scope.product.stock) return;
 		$scope.quantity++;
 	}
 
