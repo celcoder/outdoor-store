@@ -26,9 +26,12 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
   $scope.showShipping = !$scope.showShipping;
  }
 
- $scope.submitOrder = function (id) {
+ $scope.submitOrder = function (userId, cartId) {
 
-  $state.go('orderFulfilled');
+  OrderFactory.purchase(userId, cartId)
+    .then(function () {})
+
+    $state.go('confirmation', {id: userId, orderId: cartId});
  }
 
  $scope.cart.subtotal = 0;

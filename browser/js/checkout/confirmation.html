@@ -1,0 +1,26 @@
+<div class="container">
+
+  <h2>Your order has been submitted for processing!</h2>
+  <p>Your order confirmation number is {{ order.id }}. A confirmation email will be sent to {{user.email}} shortly.</p>
+  <p>Please review your order below, and print this page for your record.</p>
+
+  <table class="cart table checkout">
+      <th>Item</th><th></th><th>Quantity</th><th>Price</th><th>
+      <tr ng-repeat="product in order.products">
+        <td><img ui-sref="product({id: product.id})" ng-src="{{product.photoUrl}}"></td>
+        <td>{{product.name}}</td>
+        <td>
+        {{product.productcart.quantity}}
+        </td>
+        <td>{{product.price}}</td>
+      </tr>
+      <tr>
+        <td></td><td></td>
+        <td><strong>Subtotal:</strong></td>
+        <td><strong>{{ cart.subtotal }}</strong></td>
+      </tr>
+    </table>
+
+  <h3>Thank you for your patronage. <a ui-sref="browse">Continue Shopping</a></h3>
+
+</div>

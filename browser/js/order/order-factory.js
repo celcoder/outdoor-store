@@ -41,6 +41,20 @@ app.factory('OrderFactory', function($http, Session, AuthService){
 	OrderFactory.updateCart = function(userId, productId, quantityChange){
 		return $http.put("/api/orders/"+userId+"/updateCart", {productId: productId, quantityChange: quantityChange})
 		.then(function(){})
+	},
+
+	OrderFactory.purchase = function (userId, orderId) {
+		return $http.put('/api/orders/' +userId+ "/" + orderId + '/purchase')
+			.then(function (array) {
+				return [array[0].data, array[1].data];
+			})
+	},
+
+	OrderFactory.fetchById = function (userId, orderId) {
+		return $http.get('/api/orders/' + userId + "/" + orderId)
+			.then(function (order) {
+				return order.data;
+			})
 	}
 
 	return OrderFactory;
