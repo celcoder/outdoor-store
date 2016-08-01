@@ -183,6 +183,15 @@ router.put('/:userId/:id/purchase', ensureAuthenticated, function(req,res,next){
 	.catch(next);
 })
 
+router.put('/shipall', ensureAuthenticated, function(req,res,next){
+	if (!isAdmin(req)) return res.sendStatus(401);
+	Order.update(req.body,{where:{status: 'ordered'}, returning: true})
+	.then(function(updatedOrders){
+		return res.status(200).send(updatedOrders);
+	})
+	.catch(next);
+})
+
 //Admin change order status req.body must be {status: ''}
 //NEED TO FIX CALL TO ISCORRECT BECAUSE REQ.BODY NOT PARAMS
 router.put('/:id/status', ensureAuthenticated, function(req,res,next){

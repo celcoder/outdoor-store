@@ -5,7 +5,7 @@
   <hr class="m-y-2">
   <p>What do you want to do?</p>
   <p class="lead">
-    <a class="btn btn-warning btn-lg" role="button">Batch Ship Orders</a>
+    <a ng-click="shipAll(); viewOrdered(); bulkUpdate()" class="btn btn-warning btn-lg" role="button">Batch Ship Orders</a>
     <a ng-click="viewOrdered()" class="btn btn-primary btn-lg" ui-sref-active='active' ui-sref="admin-orders" role="button">View Orders Ready to be Shipped</a>
     <a ng-click="viewAll()"  ui-sref-active='active' ui-sref="admin-orders" class="btn btn-primary btn-lg" role="button">View All Orders</a>
   </p>
