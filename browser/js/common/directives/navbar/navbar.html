@@ -1,12 +1,12 @@
-<!-- <nav class="navbar navbar-static-top">
+<nav ng-show="!title" class="navbar navbar-static-top">
 
   <div class="container">
     <div class="navbar-header">
-      <fullstack-logo></fullstack-logo>
+      <fullstack-logo-two></fullstack-logo-two>
     </div>
     <ul class="nav navbar-nav">
       <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-        <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+        <a ng-click="comeHome()" ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
       </li>
       <li>
         <div class="btn-group">
@@ -46,8 +46,8 @@
       <button ng-click="logout()" class="btn btn-primary"><a>Logout</a></button>
     </div>
   </div>
-</nav> -->
-<nav class="navbar navbar-fixed-top">
+</nav>
+<nav  ng-show="title" class="navbar navbar-fixed-top">
 
 <div class='col-xs-8 col-sm-4 col-md-2'>
     <div class="navbar-header">
@@ -75,11 +75,13 @@
             Browse Collection<span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li><a ui-sref-active="active" ui-sref="gear">Gear</a></li>
-            <li><a ui-sref-active="active" ui-sref="mens">Men's Apparel</a></li>
-            <li><a ui-sref-active="active" ui-sref="womens">Women's Apparel</a></li>
+            <li><a ng-click="leaveHome()" ui-sref-active="active" ui-sref="browse">All Products</a></li>
             <li role="separator" class="divider"></li>
-            <li><a ui-sref-active="active" ui-sref="browse">All Products</a></li>
+            <li><a ng-click="leaveHome()" ui-sref-active="active" ui-sref="gear">Gear</a></li>
+            <li><a ng-click="leaveHome()" ui-sref-active="active" ui-sref="mens">Men's Apparel</a></li>
+            <li><a ng-click="leaveHome()" ui-sref-active="active" ui-sref="womens">Women's Apparel</a></li>
+            
+            
           </ul>
 
         </div>

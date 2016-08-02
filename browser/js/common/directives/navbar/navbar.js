@@ -15,6 +15,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             scope.account = {label: 'Account Information', state: 'account', auth: true};
 
             scope.user = null;
+            scope.title = true;
 
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
@@ -35,6 +36,13 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             var removeUser = function () {
                 scope.user = null;
             };
+
+            scope.leaveHome = function (){
+                scope.title = false;
+            }
+            scope.comeHome = function (){
+                scope.title = true;
+            }
 
             setUser();
 
