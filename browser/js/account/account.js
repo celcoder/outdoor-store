@@ -34,7 +34,7 @@ app.controller('UserCtrl', function($scope, user, orderHistory, cart, reviews, U
   $scope.user = user;
   $scope.details = {};
 
-  $scope.details.showUserDetails = true;
+  $scope.details.showUserDetails = false;
   $scope.details.showContactInfo = false;
   $scope.details.showPaymentInfo = false;
 
