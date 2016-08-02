@@ -30,9 +30,47 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('UserCtrl', function($scope, user, orderHistory, cart, reviews) {
-
+app.controller('UserCtrl', function($scope, user, orderHistory, cart, reviews, UserFactory) {
   $scope.user = user;
+  $scope.details = {};
+
+  $scope.details.showUserDetails = true;
+  $scope.details.showContactInfo = false;
+  $scope.details.showPaymentInfo = false;
+
+  $scope.details.toggleUserView = function () {
+    $scope.details.showUserDetails = !$scope.details.showUserDetails
+  }
+
+  $scope.details.toggleContactView = function () {
+    $scope.details.showContactInfo = !$scope.details.showContactInfo
+  }
+
+  $scope.details.togglePaymentView = function () {
+    $scope.details.showPaymentInfo = !$scope.details.showPaymentInfo
+  }
+
+  $scope.details.saveUserDetails = function () {
+    $scope.details.showUserDetails = !$scope.details.showUserDetails;
+
+    UserFactory.modifyUser($scope.user.id, $scope.user);
+
+  }
+
+  $scope.details.saveContact = function () {
+    $scope.details.showContactInfo = !$scope.details.showContactInfo;
+
+    UserFactory.modifyUser($scope.user.id, $scope.user);
+
+  }
+
+  $scope.details.savePayment = function () {
+    $scope.details.showPaymentInfo = !$scope.details.showPaymentInfo;
+
+    UserFactory.modifyUser($scope.user.id, $scope.user);
+
+  }
+
   $scope.orderHistory = orderHistory;
   $scope.cart = cart;
   var prices = cart.products.map(function(product) {

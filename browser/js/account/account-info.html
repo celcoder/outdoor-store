@@ -5,10 +5,11 @@
 
     <h3>Account Settings</h3>
     <ul>
-      <li>Name</li>
-      <li>Contact</li>
-      <li>Payment</li>
+      <li><a href='#' ng-click="details.toggleUserView()">User Details</a></li>
+      <li ng-click=""><a href='#' ng-click="details.toggleContactView()">Contact Information</a></li>
+      <li ng-click=""><a href='#' ng-click="details.togglePaymentView()">Payment Information</a></li>
     </ul>
+    <update-info user-view='user' details-view="details"></update-info>
 
   </div>
 

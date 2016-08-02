@@ -1,0 +1,26 @@
+<form ng-submit="detailsView.saveUserDetails()" ng-show="detailsView.showUserDetails">
+  <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input ng-model="userView.first_name" type="text" class="form-control" id="firstName" placeholder="First Name" value="{{userView.first_name}}">
+      <label for="exampleInputPassword1">Last Name</label>
+      <input type="text" ng-model="userView.last_name" class="form-control" id="exampleInputPassword1" placeholder="Last Name" value="{{userView.last_name}}">
+      <label for="email">Email</label>
+      <input type="text" ng-model="userView.email"class="form-control" id="email" placeholder="e.g. kewlstardontw8@hotmail.com" value="{{userView.email}}">
+      <button type="submit" class="btn btn-default">Save User Details</button>
+    </div>
+</form>
+
+<address address-view="userView" ng-show="detailsView.showContactInfo"></address>
+<button ng-show="detailsView.showContactInfo" type="submit" class="btn btn-default" ng-click="detailsView.saveContact()">Save Contact Information</button>
+
+<form ng-submit="detailsView.savePayment()" ng-show="detailsView.showPaymentInfo">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Credit Card Number</label>
+    <input type="password" ng-model="userView.credit_card_number" class="form-control" id="exampleInputEmail1" placeholder="XXXX-XXXX-XXXX-XXXX" value="{{userView.credit_card_number}}">
+    <label for="exampleInputPassword1">Expiration Date</label>
+    <input type="text" id="exampleInputPassword1" placeholder="e.g. 10/18">
+    <label for="exampleInputPassword1">Security Code</label>
+    <input type="password" id="exampleInputPassword1" placeholder="3 digit XXX">
+    <button type="submit" class="btn btn-default">Save Payment Information</button>
+  </div>
+</form>
