@@ -38,7 +38,6 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
  $scope.submitOrder = function (userId, cartId, address) {
 
   if ($scope.showShipping === false) {
-    console.log(user.email);
     address = {street_address: user.street_address, city: user.city, state: user.state, zip: user.zip, first_name: user.first_name, last_name: user.last_name, status: 'ordered', email: user.email}
   }
 
