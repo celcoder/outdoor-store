@@ -1,5 +1,5 @@
 app.config(function($stateProvider) {
-  $stateProvider.state('adminProducts', {
+  $stateProvider.state('admin-products', {
     url: '/admin/products',
     templateUrl: 'js/admin/admin-products.html',
     controller: 'AdminProductsCtrl',
@@ -14,9 +14,9 @@ app.config(function($stateProvider) {
 
 app.controller('AdminProductsCtrl', function($scope, getAllProducts, $filter){
   $scope.allProducts = getAllProducts;
-  
+
   $scope.outOfStock = $scope.allProducts.filter(function(product) {
-    return product.status === 'Out of Stock';
+    return product.status === 'out of stock';
   })
 
   $scope.products = $scope.allProducts;
@@ -34,7 +34,7 @@ app.controller('AdminProductsCtrl', function($scope, getAllProducts, $filter){
 
   $scope.viewOutOfStock = function() {
     $scope.main = false;
-    $scope.products = $scope.ordersToBeShipped;
+    $scope.products = $scope.outOfStock;
   }
 
 
