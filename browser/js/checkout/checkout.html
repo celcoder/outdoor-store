@@ -4,16 +4,16 @@
     <pre>{{user | json}}</pre>
     <pre>{{address | json}}</pre>
     <address address-view="user"></address>
-    <form>
+    <form name="addressForm">
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" ng-model="user.email" class="form-control" id="email" placeholder="e.g. kewlstardontw8@hotmail.com" value="{{user.email}}">
+        <input type="text" required ng-model="user.email" class="form-control" id="email" placeholder="e.g. kewlstardontw8@hotmail.com" value="{{user.email}}">
         <label for="exampleInputEmail1">Credit Card Number</label>
-        <input type="password" class="form-control" id="exampleInputEmail1" placeholder="XXXX-XXXX-XXXX-XXXX">
+        <input type="password" required class="form-control" id="exampleInputEmail1" placeholder="XXXX-XXXX-XXXX-XXXX">
         <label for="exampleInputPassword1">Expiration Date</label>
-        <input type="text" id="exampleInputPassword1" placeholder="e.g. 10/18">
+        <input type="text" id="exampleInputPassword1" required placeholder="e.g. 10/18">
         <label for="exampleInputPassword1">Security Code</label>
-        <input type="password" id="exampleInputPassword1" placeholder="3 digit XXX">
+        <input type="password" required ng-maxlength="3" id="exampleInputPassword1" placeholder="3 digit XXX">
       </div>
     </form>
   </div>
@@ -25,7 +25,7 @@
     <address address-view="cart"></address>
   </div>
 
- <button type="submit" class="btn btn-default" ng-click="submitOrder(user.id, cart.id, address)">Confirm Order</button>
+ <button type="submit" ng-disabled="addressForm.$invalid" class="btn btn-default" ng-click="submitOrder(user.id, cart.id, address)">Confirm Order</button>
 </div>
 
 <div class="col-xs-12 col-sm-4 col-md-4">
