@@ -1,9 +1,13 @@
+
+
+.panel-group {
+  position: absolute;
+   z-index:9;
+}
 navbar {
 
   display: block;
-  background: white;
-  border-bottom: 1px solid black;
-  box-shadow: 1px 1px 14px -3px black;
+  background: rgba(76, 175, 80, 0.7);
 
   .container {
     width: 91%;
@@ -58,4 +62,7 @@ navbar {
     }
   }
 
+}
+.panel-title {
+  text-align: center;
 }

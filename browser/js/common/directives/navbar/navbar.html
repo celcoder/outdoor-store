@@ -1,4 +1,4 @@
-<nav class="navbar navbar-static-top">
+<!-- <nav class="navbar navbar-static-top">
 
   <div class="container">
     <div class="navbar-header">
@@ -31,12 +31,74 @@
           <ul class="dropdown-menu">
             <li><a ui-sref-active="active" ui-sref="admin-orders">View/Update Orders</a></li>
             <li><a ui-sref-active="active" ui-sref="adminUsers">View/Update Users</a></li>
-            <li><a ui-sref-active="active" ui-sref="adminProducts">View/Update Products</a></li>
+            <li><a ui-sref-active="active" ui-sref="admin-products">View/Update Products</a></li>
           </ul>
         </div>
       </li>
     </ul>
     <div ng-show="!user" class="welcome">
+      <button ui-sref="cart" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
+      <button ui-sref="login" class="btn btn-primary">Login</button>
+    </div>
+    <div ng-show="user" class="welcome">
+      <span>Welcome, <a ui-sref-active="active" ui-sref="account({id: user.id})">{{ user.first_name }}!</a></span>
+      <button ui-sref="cart" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
+      <button ng-click="logout()" class="btn btn-primary"><a>Logout</a></button>
+    </div>
+  </div>
+</nav> -->
+<nav class="navbar navbar-fixed-top">
+<div class='col-xs-8 col-sm-4 col-md-2'>
+    <div class="panel-group">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse1"><kbd>Adventure</kbd></a>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+          <div class="panel-body"><a ui-sref-active="active" ui-sref="gear">Gear</a></div>
+          <div class="panel-body"><a ui-sref-active="active" ui-sref="mens">Men's Apparel</a></div>
+          <div class="panel-body"><a ui-sref-active="active" ui-sref="womens">Women's Apparel</a></div>
+          <div class="panel-body"><a ui-sref-active="active" ui-sref="browse">All Products</a></div>
+          <div class="panel-footer"><a ui-sref-active="active" ui-sref="home">Home</a></div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class='col-xs-8 col-sm-4 col-md-2'>
+    <div class="panel-group container-fluid">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse2"><kbd>Account</kbd></a>
+          </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+          <div class="panel-body"><a>Account Settings</a></div>
+          <div class="panel-body"><a>View Cart  <span class="glyphicon glyphicon-shopping-cart"></span></a></div>
+          <div class="panel-footer"><a>Logout</a></div>
+        </div>
+      </div>
+    </div>
+</div>
+<div ng-if="user.admin" class='col-xs-8 col-sm-4 col-md-2'>
+    <div class="panel-group">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse3"><kbd>Administrator</kbd></a>
+          </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse">
+          <div class="panel-body"><a ui-sref-active="active" ui-sref="admin-orders">View/Update Orders</a></div>
+          <div class="panel-body"><a ui-sref-active="active" ui-sref="adminUsers">View/Update Users</a></div>
+          <div class="panel-footer"><a ui-sref-active="active" ui-sref="admin-products">View/Update Products</a></div>
+        </div>
+      </div>
+    </div>
+</div>
+<div ng-show="!user" class="welcome">
       <button ui-sref="cart" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
       <button ui-sref="login" class="btn btn-primary">Login</button>
     </div>
