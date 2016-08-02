@@ -6,6 +6,7 @@ app.config(function ($stateProvider) {
     controller: 'CheckoutCtrl',
     resolve: {
       user: function (UserFactory, $stateParams) {
+        if (!$stateParams.id) return {};
         return UserFactory.fetchById($stateParams.id)
       },
       cart: function (OrderFactory, $stateParams) {
@@ -21,7 +22,7 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
  $scope.user = user;
  $scope.cart = cart;
  $scope.showShipping = false;
- $scope.address = {street_address: user.street_address, city: user.city, state: user.state, zip: user.zip, first_name: user.first_name, last_name: user.last_name, status: 'ordered'}
+ $scope.address;
 
  $scope.toggleShipping = function () {
   $scope.showShipping = !$scope.showShipping;
@@ -35,6 +36,10 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
  }
 
  $scope.submitOrder = function (userId, cartId, address) {
+
+  if ($scope.showShipping === false) {
+    address = {street_address: user.street_address, city: user.city, state: user.state, zip: user.zip, first_name: user.first_name, last_name: user.last_name, status: 'ordered'}
+  }
 
   $scope.cart.status = "ordered";
 
