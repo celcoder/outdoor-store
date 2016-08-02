@@ -1,66 +1,31 @@
-<!-- <div style="position: fixed; z-index: -99; width: 100vw; height: 100%">
-  <iframe frameborder="0" height="100%" width="100%" 
-    src="https://youtube.com/embed/bHnqUQ1c6yc?autoplay=1&vq=hd1080&controls=0&showinfo=0&autohide=1">
-  </iframe>
-</div> -->
-
-<div class = "col-xs-12 col-sm-12 col-md-12">
-
-
-<!-- <div class="panel panel-default panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title">Featured Products</h3>
+<video ng-show="video" width="100%" height="100%" autoplay loop>
+  <source src="/js/home/video/snowboard.mp4" type="video/mp4" />
+  <source src="movie.ogg" type="video/ogg" />
+</video>
+<div class="main">
+  <div id="featured" class="col-xs-12 col-sm-12 col-md-12">
+    <h2>Featured Products</h2>
+    <div class="row">
+      <div ng-repeat="randomProduct in randomProducts" class="col-xs-12 col-sm-6 col-md-3">
+        <div class="thumbnail">
+          <img ui-sref-active="active" ui-sref="product({id: randomProduct.id})" ng-src="{{randomProduct.photoUrl}}">
+          <div class="caption">
+          </div>
+        </div>
+        <h4>{{randomProduct.name.split('-')[0]}}</h4>
+      </div>
+    </div>
   </div>
-  <div class="panel-body">
-    <div  ng-repeat="randomProduct in randomProducts" class="col-xs-6 col-md-3">
-
-	      <img ng-src="{{randomProduct.photoUrl}}" class="img-rounded" height="250" width="200">
-	      <div class="caption">
-	        <h4>{{randomProduct.name.split('-')[0]}}</h4>
-	        
-	      </div>
-	  </div>
-  </div>
-</div> -->
-	<!-- <div class="row">
-		<div  ng-repeat="randomProduct in randomProducts" class="col-xs-12 col-sm-6 col-md-4">
-			
-			<div class="thumbnail">
-		      <img ui-sref-active="active" ui-sref="product({id: randomProduct.id})" ng-src="{{product.photoUrl}}">
-		      <div class="caption">
-		      	<h2>{{randomProduct.name.split('-')[0]}}</h2>
-		        
-		      </div>
-		    </div>
-
-		</div> -->
-
-<div id="featured" class = "col-xs-12 col-sm-12 col-md-12">
-	<h2>Featured Products</h2>
-  	<div class="row">
-		<div  ng-repeat="randomProduct in randomProducts" class="col-xs-12 col-sm-6 col-md-3">
-			
-			<div class="thumbnail">
-		      <img ui-sref-active="active" ui-sref="product({id: randomProduct.id})" ng-src="{{randomProduct.photoUrl}}">
-		      <div class="caption">
-		      	
-		        
-		      </div>
-		    </div>
-		    <h4>{{randomProduct.name.split('-')[0]}}</h4>
-		</div>
- 
 </div>
 <!-- <div class = "col-xs-12 col-sm-12 col-md-12">
     <h3><span class="label label-default">Featured Products</span></h3>
-	<div ng-repeat="randomProduct in randomProducts"  class="col-xs-12 col-sm-6 col-md-4">
-		<div class="thumbnail">
-		    <img ng-src="{{randomProduct.photoUrl}}">
-		    <div class="caption">
-		        <h3>{{randomProduct.name}}</h3>
-		        
-		    </div>
-		</div>
-	</div>
+  <div ng-repeat="randomProduct in randomProducts"  class="col-xs-12 col-sm-6 col-md-4">
+    <div class="thumbnail">
+        <img ng-src="{{randomProduct.photoUrl}}">
+        <div class="caption">
+            <h3>{{randomProduct.name}}</h3>
+            
+        </div>
+    </div>
+  </div>
 </div> -->
-

@@ -74,8 +74,8 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('ProductsCtrl', function ($scope, products, OrderFactory, Session, $state) {
-
+app.controller('ProductsCtrl', function ($scope, products, OrderFactory, Session, $state, $rootScope) {
+    $rootScope.video = false;
 	$scope.products = products;
 	//$scope.men = "Men's";
     
