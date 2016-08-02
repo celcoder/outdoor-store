@@ -37,9 +37,9 @@
         <td><img ui-sref="product({id: product.id})" ng-src="{{product.photoUrl}}"></td>
         <td>{{product.name}}</td>
         <td>
-        {{product.productcart.quantity}}
+        {{product.productOrder.quantity}}
         </td>
-        <td>{{product.price}}</td>
+        <td>{{(product.price*product.productOrder.quantity).toFixed(2)}}</td>
       </tr>
       <tr>
         <td></td><td></td>
