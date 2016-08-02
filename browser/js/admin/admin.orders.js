@@ -62,7 +62,6 @@ app.controller('AdminOrdersCtrl', function($scope, orders, $filter, OrderFactory
   $scope.ship = OrderFactory.ship;
   $scope.shipUpdate = function(order) {
     order.status = 'shipped';
-    $scope.ordersToBeShipped.splice($scope.ordersToBeShipped.indexOf(order), 1);
   }
 
   $scope.bulkUpdate = function() {
@@ -81,7 +80,6 @@ app.controller('AdminOrdersCtrl', function($scope, orders, $filter, OrderFactory
   $scope.cancel = OrderFactory.cancel;
   $scope.cancelUpdate = function(order) {
     order.status = 'canceled';
-    $scope.ordersToBeShipped.splice($scope.ordersToBeShipped.indexOf(order), 1);
   }
 
   $scope.orderDate = function() {
