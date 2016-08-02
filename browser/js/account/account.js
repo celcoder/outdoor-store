@@ -30,10 +30,10 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('UserCtrl', function($scope, user, orderHistory, cart, reviews, UserFactory) {
+app.controller('UserCtrl', function($scope, user, orderHistory, cart, reviews, UserFactory, $rootScope) {
   $scope.user = user;
   $scope.details = {};
-
+  $rootScope.video = false;
   $scope.details.showUserDetails = false;
   $scope.details.showContactInfo = false;
   $scope.details.showPaymentInfo = false;

@@ -13,7 +13,6 @@ app.config(function ($stateProvider) {
 
 
 app.controller('HomeCarousel', function ($scope, HomePagePics, randomProducts) {
-
     $scope.images = _.shuffle(HomePagePics);
     $scope.randomProducts = _.sample(randomProducts, 4);
 
