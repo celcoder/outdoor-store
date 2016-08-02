@@ -28,7 +28,7 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
   $scope.showShipping = !$scope.showShipping;
 
   if ($scope.showShipping === false) {
-    $scope.address = {street_address: user.street_address, city: user.city, state: user.state, zip: user.zip, first_name: user.first_name, last_name: user.last_name, status: 'ordered'}
+    $scope.address = {street_address: user.street_address, city: user.city, state: user.state, zip: user.zip, first_name: user.first_name, last_name: user.last_name, status: 'ordered', email: user.email}
   } else {
     $scope.address = $scope.cart;
   }
@@ -38,10 +38,12 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
  $scope.submitOrder = function (userId, cartId, address) {
 
   if ($scope.showShipping === false) {
-    address = {street_address: user.street_address, city: user.city, state: user.state, zip: user.zip, first_name: user.first_name, last_name: user.last_name, status: 'ordered'}
+    console.log(user.email);
+    address = {street_address: user.street_address, city: user.city, state: user.state, zip: user.zip, first_name: user.first_name, last_name: user.last_name, status: 'ordered', email: user.email}
   }
 
   $scope.cart.status = "ordered";
+  $scope.cart.email = $scope.user.email;
 
   OrderFactory.purchase(userId, cartId, address)
     .then(function () {})

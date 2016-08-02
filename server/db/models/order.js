@@ -27,6 +27,9 @@ module.exports = db.define('order', {
   },
   zip: {
     type: Sequelize.INTEGER
+  },
+  email: {
+    type: Sequelize.STRING
   }
 },
 {
