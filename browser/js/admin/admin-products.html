@@ -1,4 +1,15 @@
-<div class="col-xs-12 col-sm-12 col-md-12">
+<div ng-show="main" class="jumbotron">
+  <h1 class="display-3">Welcome, Administrator!</h1>
+  <p class="lead">There are <kbd>{{outOfStock.length}}</kbd> product items out of stock!</p>
+  <hr class="m-y-2">
+  <p>What do you want to do?</p>
+  <p class="lead">
+    <a ng-click="viewOutOfStock()" class="btn btn-primary btn-lg" ui-sref-active='active' ui-sref="admin-orders" role="button">View Out of Stock Products</a>
+    <a ng-click="viewAll()"  ui-sref-active='active' ui-sref="admin-orders" class="btn btn-primary btn-lg" role="button">View All Products</a>
+  </p>
+</div>
+
+<div ng-show="!main" class="col-xs-12 col-sm-12 col-md-12">
 
   <div class="btn-group" role="group" aria-label="...">
     <button type="button" class="btn btn-default" ng-click="filterByName()">Sort-By-Name</button>
@@ -26,6 +37,15 @@
          </td>
         <td>{{product.status}}</td>
         <td>{{product.stock}}</td>
+        <td>
+          <button ng-click="ship(order.id); shipUpdate(order)" type="button" class="btn btn-success">Update Stock</button>
+        </td>
+       <td ng-show="product.status ==='out of stock'">
+          <button ng-click="cancel(order.id); cancelUpdate(order)" type="button" class="btn btn-danger">Discontinue</button>
+        </td>
+        <td ng-show="product.status ==='discontinued'">
+          <button ng-click="cancel(order.id); cancelUpdate(order)" type="button" class="btn btn-info">Resupply</button>
+        </td>
       </tr>
     </tbody>
   </table>

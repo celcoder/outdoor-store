@@ -13,7 +13,30 @@ app.config(function($stateProvider) {
 
 
 app.controller('AdminProductsCtrl', function($scope, getAllProducts, $filter){
-  $scope.products = getAllProducts;
+  $scope.allProducts = getAllProducts;
+  
+  $scope.outOfStock = $scope.allProducts.filter(function(product) {
+    return product.status === 'Out of Stock';
+  })
+
+  $scope.products = $scope.allProducts;
+
+  if ($scope.outOfStock.length) {
+    $scope.main = true;
+  } else {
+    $scope.main = false;
+  }
+
+  $scope.viewAll = function() {
+    $scope.main = false;
+    $scope.products = $scope.allProducts;
+  }
+
+  $scope.viewOutOfStock = function() {
+    $scope.main = false;
+    $scope.products = $scope.ordersToBeShipped;
+  }
+
 
   var name = "name";
   var status = "status";
