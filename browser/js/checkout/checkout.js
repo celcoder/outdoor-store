@@ -40,8 +40,6 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
 
   OrderFactory.purchase(userId, cartId, address)
     .then(function () {})
-
-    $state.go('confirmation', {id: userId, orderId: cartId});
  }
 
  $scope.cart.subtotal = 0;
@@ -58,7 +56,7 @@ app.controller('CheckoutCtrl', function ($scope, user, cart, OrderFactory, $stat
     for (var i = 0; i<cart.products.length; i++){
         subtotal += prices[i] * quantities[i];
     }
-    $scope.cart.subtotal = subtotal;
+    $scope.cart.subtotal = subtotal.toFixed(2);
   }
 
 });

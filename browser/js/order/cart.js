@@ -14,7 +14,7 @@ app.controller('CartCtrl', function($scope, OrderFactory, Session, AuthService){
 	var calcSubtotal = function (){
 		if ($scope.cart.products.length){
 			var prices = $scope.cart.products.map(function(product){
-				return parseFloat(product.price);
+				return parseFloat(product.price)
 			})
 			var quantities = $scope.cart.products.map(function(product){
 				return product.productOrder.quantity;
@@ -23,7 +23,7 @@ app.controller('CartCtrl', function($scope, OrderFactory, Session, AuthService){
 			for (var i = 0; i<$scope.cart.products.length; i++){
 		    	subtotal += prices[i] * quantities[i];
 			}
-			$scope.cart.subtotal = subtotal;
+			$scope.cart.subtotal = subtotal.toFixed(2);
 		}
 	}
 

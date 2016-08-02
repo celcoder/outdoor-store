@@ -183,6 +183,18 @@ router.put('/:userId/:id/purchase', ensureAuthenticated, function(req,res,next){
 	.catch(next);
 })
 
+//Add guest order to DB as "ordered"
+router.put('/guest/purchase', function(req, res, next){
+	console.log("REQ BODY::::::", req.body);
+	req.body.status = "ordered";
+	Order.create(req.body)
+	.then(function(){
+		res.sendStatus(201);
+	})
+	.catch(next);
+})
+
+
 router.put('/shipall', ensureAuthenticated, function(req,res,next){
 	if (!isAdmin(req)) return res.sendStatus(401);
 	Order.update(req.body,{where:{status: 'ordered'}, returning: true})

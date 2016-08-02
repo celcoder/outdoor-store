@@ -203,7 +203,7 @@ var seedProducts = function() {
       name: "The North Face Furnace 20 Sleeping Bag",
       status: "available",
       photoUrl: 'https://www.rei.com/media/16618203-1a1a-498f-ab38-ad56255d32e4',
-      price: 189.90,
+      price: 189.91,
       description: "This down-insulated sleeping bag has a less-tapered cut than a standard backpacking mummy bag, giving you more room to move around on your spring, summer and fall adventures."
     }, {
       name: "Kelty Cosmic Down 0 Sleeping Bag",
