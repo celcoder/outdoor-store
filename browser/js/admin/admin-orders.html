@@ -45,7 +45,9 @@
         <td>{{order.createdAt | date : 'medium'}}</td>
         <td>{{order.status}}</td>
         <td ng-show="order.status==='ordered'">
-          <button ui-sref="admin-orders" ng-click="ship(order.id); shipUpdate(order)" type="button" class="btn btn-success">Ship Order</button>
+          <button ng-click="ship(order.id); shipUpdate(order)" type="button" class="btn btn-success">Ship Order</button>
+        </td>
+        <td ng-show="order.status==='ordered'">
           <button ng-click="cancel(order.id); cancelUpdate(order)" type="button" class="btn btn-danger">Cancel Order</button>
         </td>
       </tr>
