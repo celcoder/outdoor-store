@@ -169,16 +169,15 @@ router.put('/:userId/:id/purchase', ensureAuthenticated, function(req,res,next){
 	if (!isCorrectUser(req)) return res.sendStatus(401);
 	Order.findById(req.params.id)
 	.then(function(returnedOrder){
-		if (returnedOrder.status !== 'cart') return res.sendStatus(401);
-		else {
+		// if (returnedOrder.status !== 'cart') return res.sendStatus(401);
 			return returnedOrder.update(req.body, {returning:true})
 				.then(function(updatedOrder){
 					return Order.create({})
 						.then(function(newCart){
-						return [updatedOrder, newCart]
+						// return [updatedOrder, newCart]
+							return res.sendStatus(200);
 						})
 				})
-		}
 	})
 	.catch(next);
 })

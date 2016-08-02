@@ -40,11 +40,12 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 	}
 
 	OrderFactory.purchase = function (userId, orderId, address) {
+		console.log(AuthService.isAuthenticated());
 		if (AuthService.isAuthenticated()){
 		return $http.put('/api/orders/' +userId+ "/" + orderId + '/purchase', address)
-			.then(function (array) {
+			.then(function () {
 				$state.go('confirmation', {id: userId, orderId: orderId});
-				return [array[0].data, array[1].data];
+				return;
 			})
 		}
 		else {
