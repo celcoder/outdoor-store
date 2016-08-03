@@ -9,6 +9,11 @@ module.exports = function (db) {
     // function located at server/app/configure/index.js
     require('./configure')(app, db);
 
+    //redirect to github
+    app.get('/github',function(req,res){
+        res.redirect('https://github.com/ctheller/outdoor-store');
+    })
+
     // Routes that will be accessed via AJAX should be prepended with
     // /api so they are isolated from our GET /* wildcard.
     app.use('/api', require('./routes'));
