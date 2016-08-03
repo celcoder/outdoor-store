@@ -1,12 +1,21 @@
 <div class="main">
   <div id="browse-products">
+    <div class="col-lg-6">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." ng-model='searchFor'>
+        <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+      </div>
+      <!-- /input-group -->
+    </div>
     <div class="row">
       <h2>Men's Apparel</h2>
-      <div ng-repeat="product in products" class="col-xs-12 col-sm-6 col-md-4">
+      <div ng-repeat="product in products | filter: searchFor" class="col-xs-12 col-sm-6 col-md-4">
         <!-- <div class="content-container">
-				{{hello}}
-				<img ng-src="{{product.photoUrl}}">
-			</div> -->
+        {{hello}}
+        <img ng-src="{{product.photoUrl}}">
+      </div> -->
         <div class="thumbnail">
           <img ui-sref-active="active" ui-sref="product({id: product.id})" ng-src="{{product.photoUrl}}">
           <div class="caption">
@@ -19,3 +28,4 @@
       </div>
     </div>
   </div>
+</div>
