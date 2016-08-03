@@ -1,4 +1,7 @@
 #single-product {
+	
+	padding-top: 30px;
+
 	.content-container {
 		width: 100%;
 		img {
@@ -12,5 +15,15 @@
 
 	.btn:focus {
 		outline: none;
+	}
+
+	.btn-cart {
+		background-color: #4d6600;
+		border: none;
+	}
+
+	.btn-review {
+		background-color: #cc9900;;
+		border: none;
 	}
 }
