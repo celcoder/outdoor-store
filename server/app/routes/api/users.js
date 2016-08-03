@@ -54,14 +54,7 @@ router.post('/', (req, res, next) => {
 // updated user is returned
 router.put('/:id', (req, res, next) => {
 
-  // const id = req.params.id;
-  // User.findById(id)
-  //   .then(user => {
-  //     if (!user) res.status(404).send('No user found')
-  //     else return user.update(req.body);
-  //   })
-  //   .then(user => res.json(user))
-  //   .catch(next);
+
    User.update(req.body, {where:{id:req.params.id}, returning:true})    //not sure if this would work?
    .then(user => res.status(201).json(user))
    .catch(next); 
@@ -73,12 +66,7 @@ router.delete('/:id', (req, res, next) => {
   req.user.destroy()
     .then(() => res.status(204).send('user was deleted'))
     .catch(next);
-  // A different methodology, perhaps more performant?
-  // User.destroy({where: {id: id}})
-  // .then(function () {
-  //   res.status(204).send('user was deleted')
-  // })
-  // .catch(next);
+
 
 });
 

@@ -34,7 +34,6 @@ app.controller('CartCtrl', function($scope, OrderFactory, Session, AuthService){
 		.then(function(res){
 			$scope.cart = res;
 			calcSubtotal();
-			console.log("USER CART:", res);
 		})
 	})
 

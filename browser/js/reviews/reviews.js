@@ -4,7 +4,7 @@ app.directive('starRating', function( ) {
     template:
       '<ul class="star-rating">' +
       '<li ng-repeat="star in stars" class="star" ng-class="{filled: star.filled}" ng-click="toggle($index)">' +
-      '    <i class="glyphicon glyphicon-star"></i>' + // or &#9733
+      '    <i class="glyphicon glyphicon-star"></i>' + 
       '  </li>' +
       '</ul>',
     scope: {

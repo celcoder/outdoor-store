@@ -3,6 +3,6 @@ node_modules
 npm-debug.log
 .DS_Store
 coverage
-bower_components
+bower_componen
 public/main.js
 public/style.css

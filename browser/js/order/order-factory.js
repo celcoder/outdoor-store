@@ -3,11 +3,6 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 	var OrderFactory = {};
 
 
-	// We have a check to see if the user is
-	// authenticated, but do we have a check to make
-	// sure that the authenticated user is the same
-	// as the user whose cart they are querying?
-
 	OrderFactory.getUserCart = function(){
 
 		//deals with Auth users
@@ -40,7 +35,6 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 	}
 
 	OrderFactory.purchase = function (userId, orderId, address) {
-		console.log(AuthService.isAuthenticated());
 		if (AuthService.isAuthenticated()){
 		return $http.put('/api/orders/' +userId+ "/" + orderId + '/purchase', address)
 			.then(function () {
@@ -49,7 +43,6 @@ app.factory('OrderFactory', function($http, Session, AuthService, $q, $cookies, 
 			})
 		}
 		else {
-			console.log("ADDRESS::", address);
 			return $http.put('/api/orders/guest/purchase', address)
 			.then(function(){
 				$state.go('home');

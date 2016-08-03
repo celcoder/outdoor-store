@@ -57,11 +57,6 @@ app.controller('ProductCtrl', function ($scope, $state, $stateParams, ProductFac
     	OrderFactory.updateCart($scope.product, $scope.quantity)
     };
 
-  // ReviewFactory.fetchByProductId($stateParams.id)
-  // .then(function (allReviews) {
-  //     $scope.reviews = allReviews;
-  //     var averageRating = (allReviews.map(function(r){return r.rating}).reduce(function(a,b){return a+b}))/allReviews.length;
-  //     $scope.ratingValue = averageRating; 
-  // })
+
 
 })

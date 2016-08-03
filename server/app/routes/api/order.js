@@ -204,7 +204,6 @@ router.put('/shipall', ensureAuthenticated, function(req,res,next){
 })
 
 //Admin change order status req.body must be {status: ''}
-//NEED TO FIX CALL TO ISCORRECT BECAUSE REQ.BODY NOT PARAMS
 router.put('/:id/status', ensureAuthenticated, function(req,res,next){
 	if (!isAdmin(req)) return res.sendStatus(401);
 	Order.update(req.body,{where:{id:req.params.id}, returning: true})

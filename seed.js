@@ -274,8 +274,6 @@ var createReviews = () => {
         randomReviews.push({rating: randomRating, text: randomText})
       }
 
-    console.log(randomReviews);
-
   var creatingReviews = randomReviews.map(function(review){
     var currentReview;
     return Review.create(review)

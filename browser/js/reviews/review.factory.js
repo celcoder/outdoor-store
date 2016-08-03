@@ -5,7 +5,6 @@ app.factory('ReviewFactory', function($http, Session) {
 	reviewFactory.fetchByProductId = function(id) {
 		return $http.get('/api/products/' + id + '/reviews')
 		.then(function (reviews) {
-			console.log("reviews:", reviews)
 			return reviews.data;
 		})
 	}
