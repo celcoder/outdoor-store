@@ -67,7 +67,6 @@ module.exports = db.define('user', {
             return crypto.randomBytes(16).toString('base64');
         },
         encryptPassword: function (plainText, salt) {
-            console.log("PROBLEM HERE:", plainText, salt);
             var hash = crypto.createHash('sha1');
             hash.update(plainText);
             hash.update(salt);
