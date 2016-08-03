@@ -4,3 +4,5 @@ npm-debug.log
 .DS_Store
 coverage
 bower_components
+public/main.js
+public/style.css
