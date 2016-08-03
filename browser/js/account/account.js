@@ -39,15 +39,21 @@ app.controller('UserCtrl', function($scope, user, orderHistory, cart, reviews, U
   $scope.details.showPaymentInfo = false;
 
   $scope.details.toggleUserView = function () {
-    $scope.details.showUserDetails = !$scope.details.showUserDetails
+    $scope.details.showUserDetails = !$scope.details.showUserDetails;
+    $scope.details.showContactInfo = false;
+    $scope.details.showPaymentInfo = false;
   }
 
   $scope.details.toggleContactView = function () {
-    $scope.details.showContactInfo = !$scope.details.showContactInfo
+    $scope.details.showContactInfo = !$scope.details.showContactInfo;
+    $scope.details.showPaymentInfo = false;
+    $scope.details.showUserDetails = false;
   }
 
   $scope.details.togglePaymentView = function () {
-    $scope.details.showPaymentInfo = !$scope.details.showPaymentInfo
+    $scope.details.showPaymentInfo = !$scope.details.showPaymentInfo;
+    $scope.details.showContactInfo = false;
+    $scope.details.showUserDetails = false;
   }
 
   $scope.details.saveUserDetails = function () {
