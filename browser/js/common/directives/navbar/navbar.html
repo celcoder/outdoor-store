@@ -2,12 +2,10 @@
 
   <div class="container">
     <div class="navbar-header">
-      <fullstack-logo-two></fullstack-logo-two>
+      <fullstack-logo-two ng-click="comeHome()" ></fullstack-logo-two>
     </div>
     <ul class="nav navbar-nav">
-      <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-        <a ng-click="comeHome()" ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-      </li>
+      
       <li>
         <div class="btn-group">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,7 +45,7 @@
     </div>
   </div>
 </nav>
-<nav  ng-show="title" class="navbar navbar-fixed-top">
+<nav  id="title-page" ng-show="title" class="navbar navbar-static-top">
 
 <div class='col-xs-8 col-sm-4 col-md-2'>
     <div class="navbar-header">
