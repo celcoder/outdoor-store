@@ -12,7 +12,7 @@ module.exports = {
   "TWITTER": {
     "consumerKey": "4mB5goLnUr2gUlnybwlx6rMLb",
     "consumerSecret": "RJZMoK137pYqNs62UcR3BrrQiEgd23904dxsOjYbcHRCpbYnbl",
-    "callbackUrl": "http://127.0.0.1:1337/auth/twitter/callback"
+    "callbackUrl": "http://104.236.24.56:1337/auth/twitter/callback"
   },
   "FACEBOOK": {
     "clientID": "INSERT_FACEBOOK_CLIENTID_HERE",
@@ -22,7 +22,7 @@ module.exports = {
   "GOOGLE": {
     "clientID": "674802620761-ucebg494gki5iulfcftsrjq7r1i7kd23.apps.googleusercontent.com",
     "clientSecret": "z5MYQxRtVwayTUJgvtMpjipI",
-    "callbackURL": "http://localhost:1337/auth/google/callback"
+    "callbackURL": "http://104.236.24.56:1337/auth/google/callback"
   },
     "LOGGING": true
 };
