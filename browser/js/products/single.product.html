@@ -51,7 +51,7 @@
 			    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 			      <table class="table">
 				<th width="140px">Rating</th><th>User</th><th>Review</th>
-				<tr ng-repeat="review in reviews">
+				<tr ng-repeat="review in reviews | orderBy: 'createdAt' : true">
 					<td><star-rating ng-model="review.rating" readonly="true"></star-rating></td>
 					<td>{{review.user.first_name}}</td>
 					<td>{{review.text}}</td>
