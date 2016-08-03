@@ -9,10 +9,14 @@
 navbar {
 
   display: block;
-  background: rgba(76, 175, 80, 0.7);
+  #logo-div {
+    padding-right: 20px;
+  }
+ 
   h1 {
     color: white;
     font-family: Tahoma, Geneva, sans-serif;
+    font-size: 100px;
   }
   .container {
     width: 91%;
@@ -20,11 +24,8 @@ navbar {
     padding-top: 20px;
   }
 
-  fullstack-logo {
-    margin-top: 5px;
-    margin-right: 20px;
-    width: 120px;
-  }
+  
+  
 
   a {
     color: black;
@@ -33,6 +34,7 @@ navbar {
 
   .nav > li > a {
     cursor: pointer;
+
     transition: color 0.2s;
     &.active {
       color: darken(#f31214, 10%);

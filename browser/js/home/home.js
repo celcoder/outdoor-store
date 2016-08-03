@@ -12,8 +12,8 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('HomeCarousel', function ($scope, HomePagePics, randomProducts) {
+app.controller('HomeCarousel', function ($scope, HomePagePics, randomProducts, $rootScope) {
     $scope.images = _.shuffle(HomePagePics);
+    $rootScope.title = true;
     $scope.randomProducts = _.sample(randomProducts, 4);
-
 });
