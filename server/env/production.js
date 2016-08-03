@@ -7,22 +7,22 @@
  */
 
 module.exports = {
-    "DATABASE_URI": process.env.DATABASE_URI,
-    "SESSION_SECRET": process.env.SESSION_SECRET,
-    "TWITTER": {
-        "consumerKey": process.env.TWITTER_CONSUMER_KEY,
-        "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
-        "callbackUrl": process.env.TWITTER_CALLBACK
-    },
-    "FACEBOOK": {
-        "clientID": process.env.FACEBOOK_APP_ID,
-        "clientSecret": process.env.FACEBOOK_CLIENT_SECRET,
-        "callbackURL": process.env.FACEBOOK_CALLBACK_URL
-    },
-    "GOOGLE": {
-        "clientID": process.env.GOOGLE_CLIENT_ID,
-        "clientSecret": process.env.GOOGLE_CLIENT_SECRET,
-        "callbackURL": process.env.GOOGLE_CALLBACK_URL
-    },
+    "DATABASE_URI": "postgres://localhost:5432/outdoor-store",
+  "SESSION_SECRET": "Optimus Prime is my real dad",
+  "TWITTER": {
+    "consumerKey": "4mB5goLnUr2gUlnybwlx6rMLb",
+    "consumerSecret": "RJZMoK137pYqNs62UcR3BrrQiEgd23904dxsOjYbcHRCpbYnbl",
+    "callbackUrl": "http://127.0.0.1:1337/auth/twitter/callback"
+  },
+  "FACEBOOK": {
+    "clientID": "INSERT_FACEBOOK_CLIENTID_HERE",
+    "clientSecret": "INSERT_FACEBOOK_CLIENT_SECRET_HERE",
+    "callbackURL": "INSERT_FACEBOOK_CALLBACK_HERE"
+  },
+  "GOOGLE": {
+    "clientID": "674802620761-ucebg494gki5iulfcftsrjq7r1i7kd23.apps.googleusercontent.com",
+    "clientSecret": "z5MYQxRtVwayTUJgvtMpjipI",
+    "callbackURL": "http://localhost:1337/auth/google/callback"
+  },
     "LOGGING": true
 };
