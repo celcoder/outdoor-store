@@ -1,14 +1,14 @@
 <div class="main">
-  <div id="browse-products">
-    <div class="col-lg-6">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." ng-model='searchFor'>
-        <span class="input-group-btn">
+  <div class="col-lg-4">
+    <div class="input-group searchbar">
+      <input type="text" class="form-control" placeholder="Search for..." ng-model='searchFor'>
+      <span class="input-group-btn">
         <button class="btn btn-default" type="button">Go!</button>
       </span>
-      </div>
-      <!-- /input-group -->
     </div>
+  </div>
+  <div class="col-xs-12">
+    <div id="browse-products">
     <div class="row">
       <h2>Women's Apparel</h2>
       <div ng-repeat="product in products | filter: searchFor" class="col-xs-12 col-sm-6 col-md-4">

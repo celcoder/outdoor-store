@@ -1,5 +1,8 @@
 <div class="container">
 	<div ng-show="cart.products.length">
+		<h2>Your Cart:</h2>
+	</div>
+	<div ng-show="cart.products.length">
 		<table class="cart table">
 			<th>Item</th><th></th><th>Quantity</th><th>Price</th><th>
 			<tr ng-repeat="product in cart.products | orderBy : 'name'">

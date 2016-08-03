@@ -1,47 +1,100 @@
-
-
-.panel-group {
-  position: absolute;
-   z-index:9;
-}
-
-
 navbar {
 
+  
+  height: 80px;
+
+  .btn-drop {
+    color: #ffffff;
+    font-size: 16px;
+    padding: 11px 20px 10px 20px;
+    text-decoration: none;
+    background: none;
+    border: none;
+  }
+
+  #welcome {
+   padding-right: 10px;
+  }
+
+  .btn-drop:hover {
+    background: none;
+    color: #f31214;
+  }
+
+  .btn-success {
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+  }
+
+  .btn-danger {
+    margin-top: 5px;
+  }
+
+  .btn-primary {
+    background-color: white;
+    border: none;
+    color: black;
+    border-radius: 4px;
+  }
+
+  .btn-success:hover, .btn-success:active, .btn-success:focus  {
+    background-color: #cc9900;
+  }
+
+  .btn-primary:hover, .btn-primary:active, .btn-primary:focus  {
+    background-color: #4d6600;
+  }
+
+  
+
   display: block;
-  #logo-div {
-    padding-right: 20px;
-  }
- 
-  h1 {
-    color: white;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 100px;
-  }
+  background: black;
+  border-bottom: 1px solid black;
+  box-shadow: 1px 1px 14px -3px black;
+
   .container {
     width: 91%;
     max-width: 1340px;
-    padding-top: 20px;
+    padding: 0px;
   }
 
-  
-  
+  fullstack-logo {
+    img {
+      float: left;
+      margin: 5px 20px 0px 10px;
+      width: 100px;
+    }
+
+  }
+
+  #browse {
+    &:hover {
+    color: #cc9900;
+    }
+    &.active {
+      color: #cc9900;
+    }
+  }
 
   a {
-    color: black;
+    color: white;
     font-size: 16px;
+    &:hover {
+    color: #cc9900;
+    }
   }
 
   .nav > li > a {
     cursor: pointer;
-
     transition: color 0.2s;
+    padding: 12px 20px 8px 20px;
     &.active {
-      color: darken(#f31214, 10%);
+      color: #cc9900;
     }
     &:hover {
       background: none;
-      color: #f31214;
+      color: #cc9900;
     }
     &:focus {
       background: none;
@@ -51,25 +104,26 @@ navbar {
   .login-button {
     float: right;
     border: 1px solid black;
-    margin-top: 10px;
     background: none;
     outline: none !important;
   }
 
+  #btn-cart {
+        color: black;
+      }
+
   .welcome {
     float: right;
-    margin-top: 12px;
+    color: white;
     span {
-      color: black;
+      color: white;
       font-size: 16px;
-      margin-right: 5px;
+      margin: none;
     }
+    padding: 25px 10px 10px 0px;
     a {
       cursor: pointer;
     }
   }
 
-}
-.panel-title {
-  text-align: center;
 }
