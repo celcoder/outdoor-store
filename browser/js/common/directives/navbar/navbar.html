@@ -5,9 +5,9 @@
       <button ui-sref="login" class="btn btn-primary">Login</button>
     </div>
     <div ng-show="user" class="welcome">
-      <span>Welcome, <a ui-sref-active="active" ui-sref="account({id: user.id})">{{ user.first_name }}!</a></span>
-      <button ui-sref="cart" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></button>
-      <button ng-click="logout()" class="btn btn-primary"><a>Logout</a></button>
+      <span id="welcome">Welcome, <a ui-sref-active="active" ui-sref="account({id: user.id})">{{ user.first_name }}!</a></span>
+      <button ui-sref="cart" class="btn btn-success"><span id="btn-cart" class="glyphicon glyphicon-shopping-cart"></span></button>
+      <button ng-click="logout()" class="btn btn-primary">Logout</button>
     </div>
 
 
@@ -26,11 +26,12 @@
             Browse Products<span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
+          <li><a ui-sref-active="active" ui-sref="browse">All Products</a></li>
+            <li role="separator" class="divider"></li>
             <li><a ui-sref-active="active" ui-sref="gear">Gear</a></li>
             <li><a ui-sref-active="active" ui-sref="mens">Men's Apparel</a></li>
             <li><a ui-sref-active="active" ui-sref="womens">Women's Apparel</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a ui-sref-active="active" ui-sref="browse">All Products</a></li>
+        
           </ul>
 
         </div>

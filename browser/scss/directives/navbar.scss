@@ -6,10 +6,14 @@ navbar {
   .btn-drop {
     color: #ffffff;
     font-size: 16px;
-    padding: 10px 20px 10px 20px;
+    padding: 11px 20px 10px 20px;
     text-decoration: none;
     background: none;
     border: none;
+  }
+
+  #welcome {
+   padding-right: 10px;
   }
 
   .btn-drop:hover {
@@ -21,6 +25,10 @@ navbar {
     background-color: white;
     border: none;
     border-radius: 4px;
+  }
+
+  .btn-danger {
+    margin-top: 5px;
   }
 
   .btn-primary {
@@ -100,10 +108,15 @@ navbar {
     outline: none !important;
   }
 
+  #btn-cart {
+        color: black;
+      }
+
   .welcome {
     float: right;
+    color: white;
     span {
-      color: black;
+      color: white;
       font-size: 16px;
       margin: none;
     }
